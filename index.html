@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+  <title>SmartNest | Home Security & Automation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SmartNest home">
+        <span class="brand-mark">⌂</span>
+        <span><strong>SmartNest</strong><small>HOME SYSTEM</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav">
+        <a class="nav-link active" href="#overview"><span>▦</span> Overview</a>
+        <a class="nav-link" href="#lighting"><span>☼</span> Lighting</a>
+        <a class="nav-link" href="#security"><span>◈</span> Security</a>
+        <a class="nav-link" href="#access"><span>⌑</span> Door access</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="connection-dot"></div>
+        <div><strong>Demo mode</strong><small>Hardware not connected</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR HOME, CONNECTED</p>
+          <h1>Home dashboard</h1>
+          <p class="subheading">Manage your lights, security and door access from one place.</p>
+        </div>
+        <div class="top-actions">
+          <span class="demo-pill"><span></span> DEMO MODE</span>
+          <div class="avatar">SN</div>
+        </div>
+      </header>
+
+      <section class="welcome-panel">
+        <div class="welcome-copy">
+          <div class="welcome-tag"><span class="pulse"></span> SYSTEM OVERVIEW</div>
+          <h2>Welcome home.</h2>
+          <p>Your smart home controls are ready. Try the switches below to preview the dashboard.</p>
+          <a class="text-link" href="#lighting">Manage your lighting <span>→</span></a>
+        </div>
+        <div class="house-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="house-icon">
+            <div class="roof"></div>
+            <div class="house-body"><div class="window window-left"></div><div class="window window-right"></div><div class="door-shape"></div></div>
+          </div>
+          <div class="art-chip chip-light">☼ <span>Lighting</span></div>
+          <div class="art-chip chip-shield">◈ <span>Security</span></div>
+        </div>
+      </section>
+
+      <section class="section-heading">
+        <div><p class="eyebrow">AT A GLANCE</p><h2>System status</h2></div>
+        <span class="updated-label"><span class="status-dot"></span> Local demo · updates instantly</span>
+      </section>
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon amber">☼</span><span class="mini-label">LIGHTING</span></div>
+          <div class="stat-number"><span id="lights-on-count">0</span><small> / 3 on</small></div>
+          <p>Room lights active</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon green">◈</span><span class="mini-label">SECURITY</span></div>
+          <div class="stat-number" id="security-stat">Disarmed</div>
+          <p id="security-stat-note">Monitoring is paused</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon blue">⌑</span><span class="mini-label">DOOR</span></div>
+          <div class="stat-number" id="door-stat">Locked</div>
+          <p>Front door status · demo</p>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel lighting-panel" id="lighting">
+          <div class="panel-heading">
+            <div><p class="eyebrow">ROOM CONTROL</p><h2>Smart lighting</h2></div>
+            <span class="count-badge"><span id="lights-on-count-small">0</span> active</span>
+          </div>
+          <p class="panel-description">Each light has its own independent ON/OFF control.</p>
+          <div class="lights-grid">
+            <article class="light-card" data-light="L1">
+              <div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L1-state">OFF</span></div>
+              <h3>Light L1</h3><p>Living room</p>
+              <button class="toggle-button" data-toggle-light="L1" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button>
+            </article>
+            <article class="light-card" data-light="L2">
+              <div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L2-state">OFF</span></div>
+              <h3>Light L2</h3><p>Bedroom</p>
+              <button class="toggle-button" data-toggle-light="L2" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button>
+            </article>
+            <article class="light-card" data-light="L3">
+              <div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L3-state">OFF</span></div>
+              <h3>Light L3</h3><p>Kitchen</p>
+              <button class="toggle-button" data-toggle-light="L3" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button>
+            </article>
+          </div>
+          <div class="voice-panel">
+            <div class="voice-icon">🎙</div>
+            <div class="voice-copy"><strong>Voice command</strong><p id="voice-status">Try “L1 on”, “L2 off” or “all lights off”.</p></div>
+            <button class="primary-button" id="voice-button"><span>🎙</span> Speak</button>
+          </div>
+          <form class="command-form" id="command-form">
+            <label for="command-input">Or type a command</label>
+            <div class="command-row"><input id="command-input" type="text" placeholder="e.g. L1 ON" autocomplete="off"><button class="secondary-button" type="submit">Run command</button></div>
+            <small>Demo commands: L1 ON/OFF, L2 ON/OFF, L3 ON/OFF, ALL LIGHTS ON/OFF.</small>
+          </form>
+        </div>
+
+        <div class="right-column">
+          <section class="panel security-panel" id="security">
+            <div class="panel-heading"><div><p class="eyebrow">PROTECTION</p><h2>Home security</h2></div><span class="shield-icon">◈</span></div>
+            <div class="security-status" id="security-status-box">
+              <span class="security-status-icon" id="security-status-icon">✓</span>
+              <div><strong id="security-status-title">System disarmed</strong><p id="security-status-text">Your demo alarm is not monitoring.</p></div>
+            </div>
+            <div class="security-controls">
+              <button class="arm-button" id="arm-button">Arm system</button>
+              <button class="disarm-button" id="disarm-button" disabled>Disarm</button>
+            </div>
+            <div class="device-row"><span class="row-icon">☼</span><span><strong>Security light</strong><small>Motion-triggered</small></span><span class="status-text" id="security-light-state">Standby</span></div>
+            <div class="device-row"><span class="row-icon">♬</span><span><strong>Alarm bell</strong><small>Intrusion alert</small></span><span class="status-text" id="bell-state">Silent</span></div>
+            <button class="test-alert-button" id="test-alert-button">Test motion alert (demo)</button>
+            <p class="micro-note">Testing only changes this webpage. It does not trigger a real alarm or light.</p>
+          </section>
+
+          <section class="panel access-panel" id="access">
+            <div class="panel-heading"><div><p class="eyebrow">ENTRY CONTROL</p><h2>Front door</h2></div><span class="lock-icon">⌑</span></div>
+            <div class="door-visual"><div class="door-illustration"><span class="door-handle"></span></div><div><strong id="door-status-title">Door locked</strong><p id="door-status-copy">Access is secured.</p></div></div>
+            <form id="door-form">
+              <label for="door-code">Enter access code</label>
+              <div class="code-row"><input id="door-code" type="password" inputmode="numeric" maxlength="12" placeholder="Enter code" autocomplete="off" required><button class="primary-button" type="submit">Verify</button></div>
+              <small class="form-hint">For this local demo only. Do not use a client-side code as real door security.</small>
+            </form>
+            <button class="secondary-button full-button" id="lock-door-button">Lock door</button>
+            <p class="micro-note" id="door-message" aria-live="polite">Enter your demo access code to preview door control.</p>
+          </section>
+        </div>
+      </section>
+
+      <footer><span>SmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Prototype interface · not connected to hardware</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
