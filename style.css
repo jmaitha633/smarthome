@@ -4,3 +4,46 @@
 @media(max-width:1100px){.main-content{padding:28px 24px 20px}.content-grid{grid-template-columns:1fr}.right-column{grid-template-columns:repeat(2,minmax(0,1fr))}.house-art{right:1%}.welcome-copy{max-width:55%}}
 @media(max-width:760px){.sidebar{position:static;width:auto;height:auto;padding:15px 17px;display:block}.brand{padding:0}.side-label,.nav,.sidebar-bottom{display:none}.main-content{margin:0;padding:23px 15px}.topbar h1{font-size:25px}.top-actions{gap:8px}.demo-pill{font-size:8px;padding:7px}.welcome-panel{padding:24px;min-height:210px}.welcome-copy{max-width:100%}.welcome-panel h2{font-size:26px}.welcome-panel p{max-width:300px}.house-art{opacity:.15;right:-90px}.section-heading{align-items:flex-start;gap:10px}.updated-label{max-width:130px;line-height:1.5}.stats-grid{gap:9px}.stat-card{padding:13px 12px}.stat-number{font-size:21px}.stat-card p{font-size:10px}.mini-label{font-size:8px}.content-grid{margin-top:15px}.panel{padding:17px}.lights-grid{gap:7px}.light-card{padding:11px 8px}.light-card p{font-size:9px}.toggle-button{font-size:8px}.voice-panel{flex-wrap:wrap}.voice-copy{width:calc(100% - 60px)}.voice-panel .primary-button{margin-left:49px}.right-column{grid-template-columns:1fr}footer{line-height:1.7}.command-row{align-items:stretch}.command-row .secondary-button{white-space:normal}}
 @media(max-width:390px){.stats-grid{grid-template-columns:1fr}.stat-card{display:grid;grid-template-columns:1fr 1fr;align-items:center}.stat-top{grid-column:1/-1}.stat-number{margin-top:10px}.stat-card p{margin-top:10px;text-align:right}.lights-grid{grid-template-columns:1fr}.light-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:5px 12px}.light-card-top{grid-column:1/-1}.light-card h3{margin:7px 0 0}.light-card p{margin:0}.toggle-button{grid-column:2;grid-row:2/4;width:100px}}
+
+/* JK ENGINEERING SOLUTIONS — complete green energy + solar gold theme */
+:root{--bg:#f2f8f4;--surface:#ffffff;--ink:#18352a;--muted:#71857a;--line:#dfece3;--navy:#102b24;--blue:#16804c;--blue-dark:#10653b;--mint:#1ca765;--amber:#f6bd3c;--shadow:0 12px 34px rgba(16,54,38,.075)}
+body{background:var(--bg);color:var(--ink)}
+.sidebar{background:linear-gradient(180deg,#102b24 0%,#12392b 100%)}
+.brand-mark{background:linear-gradient(135deg,#f8d66a,#f2ae24);color:#18352a}
+.brand small{color:#a7c7b4}
+.side-label{color:#80a48e}
+.nav-link{color:#bdd0c3}
+.nav-link:hover,.nav-link.active{background:#1d4b36;color:#fff}
+.nav-link.active{box-shadow:inset 3px 0 #f6c453}
+.sidebar-bottom{background:#14372a;border-color:#285440}
+.sidebar-bottom small{color:#a2bca9}
+.topbar .eyebrow{color:#16804c}
+.avatar{background:#e2f5e8;color:#176a40}
+.welcome-panel{background:linear-gradient(112deg,#102b24 0%,#17563b 66%,#26794a 100%)}
+.welcome-tag{color:#bce9ca}
+.pulse{background:#8de0a7;box-shadow:0 0 0 5px #8de0a722}
+.house-body{background:#32794f}
+.roof,.house-body,.window{border-color:#d8f0df}
+.window{background:#f9d875}
+.door-shape{background:#184a32;border-color:#d8f0df}
+.orbit{border-color:#d1f1db3d}
+.art-chip{color:#173b2b}
+.chip-light{color:#b77900}
+.chip-shield{color:#16804c}
+.stat-card,.panel{border-color:#e1ece4}
+.amber{background:#fff3d0;color:#b77a00}
+.green{background:#e0f6e7;color:#16804c}
+.blue{background:#e1f4e7;color:#16804c}
+.count-badge{background:#e4f5e9;color:#176e42}
+.is-on .toggle-button{background:#dff5e6;color:#167b49}
+.is-on .toggle-knob{background:#16804c}
+.voice-panel{background:#f0f8f2;border-color:#dceee1}
+.voice-icon{background:#dff3e5;color:#176e42}
+.primary-button{background:#16804c;color:#fff}
+.primary-button:hover{background:#10653b}
+.command-row input:focus,.code-row input:focus{border-color:#16804c;box-shadow:0 0 0 3px #16804c1a}
+.install-app-button{border-color:#d5e6d9;color:#173b2b}
+.install-app-button:hover{background:#edf8f0}
+footer{color:#71857a}
+.footer-dot,.status-dot{background:#1ca765}
+@media(prefers-reduced-motion:no-preference){.primary-button,.nav-link,.stat-card,.panel{transition:background .2s,border-color .2s,box-shadow .2s,color .2s}}
