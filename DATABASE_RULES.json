@@ -1,0 +1,18 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": false,
+    "commands": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "commandsMeta": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "status": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}

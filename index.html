@@ -23,7 +23,7 @@
       </nav>
       <div class="sidebar-bottom">
         <div class="connection-dot"></div>
-        <div><strong>Demo mode</strong><small>Hardware not connected</small></div>
+        <div><strong>Firebase setup</strong><small>Sign in to connect</small></div>
       </div>
     </aside>
 
@@ -35,7 +35,7 @@
           <p class="subheading">Manage your lights, security and door access from one place.</p>
         </div>
         <div class="top-actions">
-          <span class="demo-pill"><span></span> DEMO MODE</span>
+          <span class="demo-pill"><span></span> FIREBASE SETUP</span>
           <div class="avatar">SN</div>
         </div>
       </header>
@@ -44,7 +44,7 @@
         <div class="welcome-copy">
           <div class="welcome-tag"><span class="pulse"></span> SYSTEM OVERVIEW</div>
           <h2>Welcome home.</h2>
-          <p>Your smart home controls are ready. Try the switches below to preview the dashboard.</p>
+          <p>Connect securely to Firebase to send light and security commands to your ESP32.</p>
           <a class="text-link" href="#lighting">Manage your lighting <span>→</span></a>
         </div>
         <div class="house-art" aria-hidden="true">
@@ -60,7 +60,7 @@
 
       <section class="section-heading">
         <div><p class="eyebrow">AT A GLANCE</p><h2>System status</h2></div>
-        <span class="updated-label"><span class="status-dot"></span> Local demo · updates instantly</span>
+        <span class="updated-label"><span class="status-dot"></span> Firebase status · live updates</span>
       </section>
       <section class="stats-grid">
         <article class="stat-card">
@@ -130,27 +130,27 @@
             <div class="device-row"><span class="row-icon">☼</span><span><strong>Security light</strong><small>Motion-triggered</small></span><span class="status-text" id="security-light-state">Standby</span></div>
             <div class="device-row"><span class="row-icon">♬</span><span><strong>Alarm bell</strong><small>Intrusion alert</small></span><span class="status-text" id="bell-state">Silent</span></div>
             <button class="test-alert-button" id="test-alert-button">Test motion alert (demo)</button>
-            <p class="micro-note">Testing only changes this webpage. It does not trigger a real alarm or light.</p>
+            <p class="micro-note">The ESP32 must be programmed to act on Firebase commands. Local sensor alarm logic should still work if internet is unavailable.</p>
           </section>
 
           <section class="panel access-panel" id="access">
             <div class="panel-heading"><div><p class="eyebrow">ENTRY CONTROL</p><h2>Front door</h2></div><span class="lock-icon">⌑</span></div>
             <div class="door-visual"><div class="door-illustration"><span class="door-handle"></span></div><div><strong id="door-status-title">Door locked</strong><p id="door-status-copy">Access is secured.</p></div></div>
             <form id="door-form">
-              <label for="door-code">Enter access code</label>
+              <label for="door-code">Door control</label>
               <div class="code-row"><input id="door-code" type="password" inputmode="numeric" maxlength="12" placeholder="Enter code" autocomplete="off" required><button class="primary-button" type="submit">Verify</button></div>
-              <small class="form-hint">For this local demo only. Do not use a client-side code as real door security.</small>
+              <small class="form-hint">Door movement requires ESP32 firmware, limit switches and a safe motor driver.</small>
             </form>
             <button class="secondary-button full-button" id="lock-door-button">Lock door</button>
-            <p class="micro-note" id="door-message" aria-live="polite">Enter your demo access code to preview door control.</p>
+            <p class="micro-note" id="door-message" aria-live="polite">Sign in to send door commands. Test only with a safe model-door setup.</p>
           </section>
         </div>
       </section>
 
-      <footer><span>SmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Prototype interface · not connected to hardware</span></footer>
+      <footer><span>SmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Firebase web controls · ESP32 firmware required</span></footer>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
