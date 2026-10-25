@@ -37,7 +37,7 @@
         <div>
           <p class="eyebrow">YOUR HOME, CONNECTED</p>
           <h1>Home dashboard</h1>
-          <p class="subheading">Manage your lights, security and door access from one place.</p>
+          <p class="subheading">Control lighting, security and door access in one place.</p>
         </div>
         <div class="top-actions">
           <span class="demo-pill"><span></span> FIREBASE SETUP</span>
@@ -49,7 +49,7 @@
         <div class="welcome-copy">
           <div class="welcome-tag"><span class="pulse"></span> SYSTEM OVERVIEW</div>
           <h2>Welcome home.</h2>
-          <p>Connect securely to Firebase to send light and security commands to your ESP32.</p>
+          <p>Sign in to connect Firebase and send commands to your ESP32.</p>
           <a class="text-link" href="#lighting">Manage your lighting <span>→</span></a>
         </div>
         <div class="house-art" aria-hidden="true">
@@ -81,7 +81,7 @@
         <article class="stat-card">
           <div class="stat-top"><span class="stat-icon blue">⌑</span><span class="mini-label">DOOR</span></div>
           <div class="stat-number" id="door-stat">Locked</div>
-          <p>Front door status · demo</p>
+          <p>Front door status</p>
         </article>
       </section>
 
@@ -117,7 +117,7 @@
           <form class="command-form" id="command-form">
             <label for="command-input">Or type a command</label>
             <div class="command-row"><input id="command-input" type="text" placeholder="e.g. L1 ON" autocomplete="off"><button class="secondary-button" type="submit">Run command</button></div>
-            <small>Demo commands: L1 ON/OFF, L2 ON/OFF, L3 ON/OFF, ALL LIGHTS ON/OFF.</small>
+            <small>Commands: L1 ON/OFF, L2 ON/OFF, L3 ON/OFF, ALL LIGHTS ON/OFF.</small>
           </form>
         </div>
 
@@ -126,7 +126,7 @@
             <div class="panel-heading"><div><p class="eyebrow">PROTECTION</p><h2>Home security</h2></div><span class="shield-icon">◈</span></div>
             <div class="security-status" id="security-status-box">
               <span class="security-status-icon" id="security-status-icon">✓</span>
-              <div><strong id="security-status-title">System disarmed</strong><p id="security-status-text">Your demo alarm is not monitoring.</p></div>
+              <div><strong id="security-status-title">System disarmed</strong><p id="security-status-text">The alarm is not monitoring while the system is disarmed.</p></div>
             </div>
             <div class="security-controls">
               <button class="arm-button" id="arm-button">Arm system</button>
@@ -134,7 +134,7 @@
             </div>
             <div class="device-row"><span class="row-icon">☼</span><span><strong>Security light</strong><small>Motion-triggered</small></span><span class="status-text" id="security-light-state">Standby</span></div>
             <div class="device-row"><span class="row-icon">♬</span><span><strong>Alarm bell</strong><small>Intrusion alert</small></span><span class="status-text" id="bell-state">Silent</span></div>
-            <button class="test-alert-button" id="test-alert-button">Test motion alert (demo)</button>
+            <button class="test-alert-button" id="test-alert-button">Test motion alert</button>
             <p class="micro-note">The ESP32 must be programmed to act on Firebase commands. Local sensor alarm logic should still work if internet is unavailable.</p>
           </section>
 
@@ -157,9 +157,9 @@
         <div class="contact-cta-copy">
           <p class="eyebrow">CLEAN ENERGY & ENGINEERING SUPPORT</p>
           <h2 id="contact-cta-title">Need more information?</h2>
-          <p>For details about solar energy, smart home automation, lighting, motor control and security solutions, visit <strong>JK ENGINEERING SOLUTIONS</strong>.</p>
+          <p>Explore solar energy, smart home automation, lighting, motor control and security services from <strong>JK ENGINEERING SOLUTIONS</strong>.</p>
         </div>
-        <a class="contact-cta-button" href="contact.html">Explore services & contact <span aria-hidden="true">→</span></a>
+        <a class="contact-cta-button" href="contact.html">Services & contact <span aria-hidden="true">→</span></a>
       </section>
       <footer class="site-footer"><span>JKSmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Firebase web controls · ESP32 firmware required</span></footer>
     </main>

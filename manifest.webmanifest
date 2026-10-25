@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "JKSmartNest Smart Home Security & Automation",
+  "name": "JK Engineering Solutions Smart Home",
   "short_name": "JKSmartNest",
-  "description": "Smart home controls and information about JK Engineering Solutions, clean solar energy and engineering support.",
+  "description": "Smart home controls, solar energy and engineering services.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jksmartnest-shell-v3';
+const CACHE_NAME = 'jksmartnest-shell-v4';
 const APP_FILES = ['./', './index.html', './contact.html', './contact-page.css', './contact-form.js', './style.css', './app-additions.css', './script.js', './firebase-config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './pwa.js'];
 
 self.addEventListener('install', (event) => {
