@@ -1,12 +1,12 @@
 {
   "rules": {
-    ".read": "auth != null",
+    ".read": false,
     ".write": false,
-    "commands": {
+    "controls": {
       ".read": "auth != null",
       ".write": "auth != null"
     },
-    "commandsMeta": {
+    "controlsMeta": {
       ".read": "auth != null",
       ".write": "auth != null"
     },

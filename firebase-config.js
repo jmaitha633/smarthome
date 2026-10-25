@@ -1,9 +1,11 @@
-// Fill these values from Firebase Console > Project settings > Your apps > SDK setup > Config.
-// These are browser app settings, NOT service-account credentials.
+// Firebase web app configuration for SmartNest. These are browser config values, not private keys.
 export const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY_HERE",
+  apiKey: "AIzaSyDxA_IWf89JP8KBmrb1mPOSyrpzcIofUzw",
   authDomain: "smart-home-security-17f15.firebaseapp.com",
-  databaseURL: "PASTE_YOUR_REALTIME_DATABASE_URL_HERE",
+  databaseURL: "https://smart-home-security-17f15-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "smart-home-security-17f15",
-  appId: "PASTE_YOUR_APP_ID_HERE"
+  storageBucket: "smart-home-security-17f15.firebasestorage.app",
+  messagingSenderId: "811870987728",
+  appId: "1:811870987728:web:f1da51bddc5f62a5aa05d5",
+  measurementId: "G-2P64RREPBE"
 };
