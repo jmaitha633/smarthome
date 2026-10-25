@@ -1,5 +1,5 @@
-const CACHE_NAME = 'jksmartnest-shell-v1';
-const APP_FILES = ['./', './index.html', './style.css', './app-additions.css', './script.js', './firebase-config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
+const CACHE_NAME = 'jksmartnest-shell-v3';
+const APP_FILES = ['./', './index.html', './contact.html', './contact-page.css', './contact-form.js', './style.css', './app-additions.css', './script.js', './firebase-config.js', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './pwa.js'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_FILES)).then(() => self.skipWaiting()));
@@ -12,14 +12,15 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
-  // Cache only same-origin GET app files. Firebase and other external requests stay online/network-managed.
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
   if (request.mode === 'navigate') {
     event.respondWith(fetch(request).then((response) => {
-      const copy = response.clone();
-      caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', copy));
+      if (response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+      }
       return response;
-    }).catch(() => caches.match('./index.html')));
+    }).catch(async () => (await caches.match(request)) || (await caches.match('./index.html'))));
     return;
   }
   event.respondWith(caches.match(request).then((cached) => cached || fetch(request).then((response) => {

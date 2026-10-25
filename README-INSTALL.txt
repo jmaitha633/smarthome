@@ -1,41 +1,41 @@
-JKSMARTNEST COMPLETE WEBSITE + INSTALLABLE APP PACKAGE
+JKSMARTNEST + JK ENGINEERING SOLUTIONS — WEBSITE PACKAGE
 
 WHAT IS INCLUDED
-- index.html: updated existing dashboard branded JKSmartNest, install button, contact section
-- script.js: original Firebase/dashboard controls preserved
-- style.css: original dashboard styling preserved
-- firebase-config.js: existing Firebase web configuration preserved
-- manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js, sw.js: installable Progressive Web App support
-- app-additions.css: styling for install button and professional contact section
-- contact-form.js: service/enquiry selectors and email/WhatsApp message links
-- README.md, DATABASE_RULES.json, .nojekyll: existing supporting files (where present)
+- index.html: JKSmartNest dashboard for lighting, security and model-door controls. The bottom now has only a short “For more information” call-to-action and a button linking to the separate contact page.
+- contact.html: a separate JK ENGINEERING SOLUTIONS information and contact page with company overview, service descriptions, green-energy design, solar section, enquiry form, email and WhatsApp contact.
+- contact-page.css: responsive forest-green, clean-white and solar-gold styling for the contact page.
+- app-additions.css: dashboard add-ons and compact bottom contact call-to-action.
+- contact-form.js: prepares a prefilled email or WhatsApp message using the selected service, enquiry type and message. The website does not store enquiries.
+- script.js, style.css, firebase-config.js: dashboard scripts, styling and Firebase configuration preserved from the package.
+- manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js, sw.js: installable PWA support.
+- DATABASE_RULES.json, README.md, .nojekyll: supporting files.
 
-IMPORTANT
-This package includes your existing dashboard structure and JavaScript, and adds PWA support. It does not convert the website into a native APK/EXE. It makes the website installable through supported browsers. Firebase controls still need internet and Firebase Authentication/database permissions. Offline caching does not make live Firebase controls work offline.
+CONTACT PAGE OVERVIEW
+JK ENGINEERING SOLUTIONS — “Powering Innovation. Delivering Reliable Energy.”
+The page describes:
+1. Solar energy solutions: enquiries about solar power, lighting, backup-power planning, installation support and maintenance.
+2. Smart home automation: connected lighting, remote controls and website-to-device control.
+3. Lighting and motor control: lighting controls, small motor/door mechanisms, setup and maintenance.
+4. Security systems: alarms, motion detection, security lighting and sensors.
+5. A simple enquiry process and selectable email/WhatsApp form.
 
-HOW TO PUBLISH TO YOUR EXISTING GITHUB PAGES WEBSITE
-1. Download this ZIP and choose Extract All on Windows.
-2. Open https://github.com/jmaitha633/smarthome
-3. Make a backup of your current repository files before replacing anything.
-4. Upload the files from the extracted folder to the repository root (not the enclosing folder). Replace the matching existing files with the package versions, especially index.html. Add the new files app-additions.css, contact-form.js, manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js and sw.js.
-5. Keep all files in the same root folder as index.html. Do not rename script.js or firebase-config.js.
-6. Commit changes to the main branch.
-7. Wait for GitHub Pages to finish deploying, then open https://jmaitha633.github.io/smarthome/ and refresh.
-8. On Android Chrome: use the browser menu and select Install app if shown; otherwise Add to Home screen.
-9. On Windows Edge: menu (...) > Apps > Install this site as an app. Chrome may offer an install icon/menu option when the site is installable.
-10. You can also use the Install app button on the website when your browser offers the installation prompt.
-
-PROFESSIONAL CONTACT SECTION
-The bottom of the website now says “Contact JK Engineering Solutions” and explains that users can ask about smart home systems, lighting systems, motor/door control, security/alarm systems, installation, maintenance and troubleshooting.
-Visitors can select a service and enquiry type, add an optional message, then choose Send by email or Continue on WhatsApp. Their selection and message are included in the draft; the site does not store the message.
+CONTACT DETAILS
 Email: jmaitha633@gmail.com
-WhatsApp: 0743 410 685 (opens https://wa.me/254743410685)
+WhatsApp: 0743 410 685 — https://wa.me/254743410685
 
-SAFETY / FUNCTION NOTES
-- Installing the web app does not program the ESP32 or connect hardware by itself.
-- Do not drive a motor, siren, relay load, or mains appliance directly from ESP32 GPIO pins.
-- Use suitable drivers, power supplies, protection, and door limit switches. Keep PIR alarm triggering local on the ESP32 so it can still work if internet fails.
-- Keep Firebase security rules and authentication properly configured; do not make the database publicly writable for convenience.
+PUBLISH TO GITHUB PAGES
+1. Download and extract the ZIP.
+2. Back up your current repository before replacing files.
+3. Upload all files from inside the extracted folder to the ROOT of https://github.com/jmaitha633/smarthome (not the enclosing folder).
+4. Replace matching files, and add contact.html and contact-page.css.
+5. Commit to the main branch and wait for GitHub Pages to publish.
+6. Visit https://jmaitha633.github.io/smarthome/ and click the bottom “Explore services & contact” button.
+7. If old files appear, use Ctrl+F5. The service worker cache has been versioned to help refresh the app shell.
 
-
-JK Engineering Solutions contact section includes enquiries for clean solar energy systems and solar installation/maintenance, alongside smart home, lighting, motor and security services.
+IMPORTANT TECHNICAL NOTES
+- The package does not automatically publish to GitHub Pages.
+- The contact form opens the user's email app or WhatsApp with a prepared message; it does not send or store messages automatically.
+- The dashboard still needs correctly configured Firebase access and ESP32 firmware for real hardware operation.
+- The site is a Progressive Web App, not a native APK/EXE.
+- Do not make Firebase database writes public just to simplify setup.
+- Use suitable electrical protection, driver circuits and safe low-voltage testing. Solar installations should be designed and installed to suit the actual loads and local safety requirements.

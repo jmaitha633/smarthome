@@ -7,6 +7,14 @@
   const whatsappButton = document.getElementById('contact-whatsapp-button');
   if (!form || !service || !reason || !message || !whatsappButton) return;
 
+  document.querySelectorAll('[data-service]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const requestedService = link.getAttribute('data-service');
+      const matchingOption = Array.from(service.options).find((option) => option.value === requestedService);
+      if (matchingOption) service.value = requestedService;
+    });
+  });
+
   function buildEnquiry() {
     const details = message.value.trim() || 'Please contact me to discuss this enquiry.';
     return `Hello JK Engineering Solutions,\n\nService: ${service.value}\nEnquiry type: ${reason.value}\nMessage: ${details}\n\nSent from the JKSmartNest website.`;

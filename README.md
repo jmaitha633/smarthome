@@ -1,31 +1,14 @@
-# SmartNest — Firebase website files
+# JKSmartNest — JK Engineering Solutions
 
-These files are configured for Firebase project `smart-home-security-17f15` and the Realtime Database structure currently used in your project.
+An installable smart-home dashboard with a separate, professional JK Engineering Solutions information and contact page. The visual identity uses forest green, clean white and solar gold to communicate smart technology and clean energy.
 
-## Files to upload to GitHub
-Upload all five files together to the root of `https://github.com/jmaitha633/smarthome` on the `main` branch: `index.html`, `style.css`, `script.js`, `firebase-config.js`, and `.nojekyll`. `DATABASE_RULES.json` is a reference file; do not upload it as website code.
+## Main pages
+- `index.html` — dashboard for smart lights, security status and model-door controls. A compact call-to-action at the bottom links to the contact page.
+- `contact.html` — company overview, solar-energy messaging, service descriptions, project enquiry form and direct contact details.
 
-## Database paths used
-- `/controls/light1`, `/controls/light2`, `/controls/light3` — boolean values
-- `/controls/armed` — boolean
-- `/controls/door` — `locked` or `unlocked` string for the model-door request
-- `/status/motion`, `/status/doorOpen`, `/status/alarm`, `/status/battery`, `/status/online`, `/status/lastSeen` — status values reported by device firmware
+## Contact
+- Email: jmaitha633@gmail.com
+- WhatsApp: [0743 410 685](https://wa.me/254743410685)
 
-## Authentication
-The website uses Firebase Email/Password Authentication. Sign in with a user created in Firebase Console → Authentication. Do not put your password into the source files.
-
-## Database rules
-The `DATABASE_RULES.json` file is a starter example matching these paths. Publish rules only after reviewing them. For a quick browser test, authenticated users can read/write the paths; this is not a final production security policy. Before real deployment, restrict who can control devices and who can write status. The ESP32 should use its own secure authentication approach. Never use public read/write rules.
-
-## Test
-1. Upload the website files to GitHub and wait for GitHub Pages to deploy.
-2. Open `https://jmaitha633.github.io/smarthome/`.
-3. Sign in using a Firebase Authentication email/password user.
-4. Click a light toggle and check Realtime Database → Data → `controls` to see if `light1`, `light2`, or `light3` changes.
-5. A successful database write confirms only the cloud command was saved; physical devices will not operate until the ESP32 firmware and hardware are configured.
-
-## Safety
-Use only low-voltage test lamps for early tests. Do not connect mains voltage to the ESP32 or breadboard. Do not drive a motor, relay coil or siren directly from a GPIO. Use suitable drivers, fuses, limit switches, motor timeout and an emergency/manual stop. Keep local PIR-to-alarm logic working if internet access fails.
-
-
-JK Engineering Solutions contact section includes enquiries for clean solar energy systems and solar installation/maintenance, alongside smart home, lighting, motor and security services.
+## Publishing
+Upload the files at the root of the `main` branch of the GitHub Pages repository. Back up existing files first. The contact form prepares a message for email or WhatsApp; it does not store submissions.

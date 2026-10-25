@@ -67,3 +67,10 @@
 .contact-direct-links a{color:#167a49;font-size:11px}
 @media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:21px}.contact-form{padding:17px}.solar-pill{display:none}}
 @media(max-width:480px){.contact-panel{border-radius:18px}.contact-intro h2{font-size:28px}.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.solar-highlight{padding:12px;gap:9px}.solar-icon{flex-basis:34px;height:34px;font-size:21px}}
+
+
+/* Compact dashboard footer CTA: detailed information lives on contact.html */
+.contact-cta{display:flex;align-items:center;gap:18px;margin-top:28px;padding:22px 24px;border:1px solid #d7e9dc;border-radius:18px;background:linear-gradient(110deg,#e8f6eb,#ffffff 60%,#fff8e2);box-shadow:0 12px 30px rgba(16,54,38,.055)}
+.contact-cta-icon{display:grid;place-items:center;flex:0 0 52px;height:52px;border-radius:15px;background:linear-gradient(145deg,#ffdc76,#f5b72d);color:#624700;font-size:29px;box-shadow:0 7px 15px #d5a63224}
+.contact-cta-copy{flex:1;min-width:0}.contact-cta-copy .eyebrow{color:#16804c;font-size:9px;letter-spacing:1.35px;margin:0 0 6px}.contact-cta-copy h2{font-size:18px;letter-spacing:-.45px;margin:0;color:#102b24}.contact-cta-copy p{font-size:11px;line-height:1.75;color:#5d7466;margin:6px 0 0}.contact-cta-copy strong{color:#176c41}.contact-cta-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex:0 0 auto;background:linear-gradient(120deg,#174c35,#16804c);color:#fff;text-decoration:none;padding:13px 16px;border-radius:11px;font-size:11px;font-weight:800;box-shadow:0 7px 16px #124b3020}.contact-cta-button:hover{background:#10653b;transform:translateY(-1px)}
+@media(max-width:760px){.contact-cta{align-items:flex-start;flex-wrap:wrap;padding:18px;gap:13px}.contact-cta-icon{flex-basis:43px;height:43px;font-size:24px}.contact-cta-copy{flex-basis:calc(100% - 60px)}.contact-cta-copy h2{font-size:17px}.contact-cta-button{width:100%;box-sizing:border-box}}
