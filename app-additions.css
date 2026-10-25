@@ -35,3 +35,35 @@
 .contact-direct-links a:hover{text-decoration:underline}
 @media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:20px}.contact-field-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.contact-intro h2{font-size:20px}}
+
+
+/* Premium JK Engineering + clean solar energy contact experience */
+.contact-panel{position:relative;isolation:isolate;overflow:hidden;grid-template-columns:minmax(260px,.9fr) minmax(330px,1.1fr);gap:32px;margin-top:28px;padding:clamp(22px,3.2vw,38px);border:1px solid #d9e8df;border-radius:24px;background:linear-gradient(125deg,#f1fbf5 0%,#ffffff 46%,#f3f7ff 100%);box-shadow:0 22px 55px rgba(16,54,38,.10)}
+.contact-panel:before{content:"";position:absolute;z-index:-1;left:-90px;top:-115px;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(48,174,104,.17),rgba(48,174,104,0) 70%)}
+.contact-panel:after{content:"";position:absolute;z-index:-1;right:-85px;bottom:-125px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(250,181,50,.15),rgba(250,181,50,0) 70%)}
+.contact-intro .eyebrow{display:flex;align-items:center;gap:8px;color:#16804c;font-size:10px;letter-spacing:1.45px;margin-bottom:13px}
+.solar-sun{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#fff0c6;color:#b77700;font-size:18px;box-shadow:0 4px 12px #d7a83c24}
+.contact-intro h2{font-size:clamp(27px,3vw,36px);line-height:1.12;letter-spacing:-1.2px;color:#102b24}
+.contact-intro h2 span{color:#16804c}
+.contact-intro p:not(.eyebrow){color:#536b63;font-size:13px;line-height:1.8;margin-top:14px}
+.contact-trust-points{gap:8px;margin-top:19px}
+.contact-trust-points span{display:inline-flex;align-items:center;gap:5px;border:1px solid #d5eadc;background:#e9f7ed;color:#17673e;border-radius:9px;padding:8px 10px;font-size:10px}
+.solar-highlight{display:flex;align-items:flex-start;gap:12px;position:relative;margin-top:21px;padding:15px;border:1px solid #f2d98d;border-radius:15px;background:linear-gradient(115deg,#fff8df,#fffdf4);box-shadow:0 8px 20px rgba(162,119,16,.06)}
+.solar-icon{display:grid;place-items:center;flex:0 0 39px;height:39px;border-radius:12px;background:linear-gradient(145deg,#ffc94f,#f5a900);color:#553900;font-size:24px;box-shadow:0 5px 12px #e2ad2b30}
+.solar-highlight strong{display:block;color:#4d3c10;font-size:12px;line-height:1.5}
+.solar-highlight p{margin:4px 0 0!important;color:#75663b!important;font-size:11px!important;line-height:1.65!important}
+.solar-pill{align-self:flex-start;white-space:nowrap;margin-left:auto;border-radius:6px;background:#e4f4e7;color:#177044;font-size:8px;font-weight:900;letter-spacing:.6px;padding:6px 7px}
+.contact-form{position:relative;padding:22px;border:1px solid rgba(218,230,223,.95);border-radius:18px;background:rgba(255,255,255,.9);box-shadow:0 14px 35px rgba(22,54,40,.07);backdrop-filter:blur(8px);gap:15px}
+.contact-field label{color:#213e32;font-size:11px}
+.contact-field select,.contact-field textarea{border-color:#d7e5dc;border-radius:11px;padding:12px 13px;color:#243b32;background:#fbfdfb;font-size:12px;transition:border-color .2s,box-shadow .2s,background .2s}
+.contact-field select:focus,.contact-field textarea:focus{border-color:#1f9b5b;box-shadow:0 0 0 4px rgba(31,155,91,.12);background:#fff}
+.contact-send-actions{gap:11px}
+.contact-send-button{min-height:44px;border-radius:11px;padding:13px 16px;font-size:11px;box-shadow:0 7px 16px rgba(15,45,32,.09)}
+.contact-email-button{background:linear-gradient(120deg,#174e39,#16804c);color:#fff}
+.contact-whatsapp-button{background:linear-gradient(120deg,#16804c,#22a85e);color:#fff}
+.contact-send-button:focus-visible{outline:3px solid #f1bf42;outline-offset:3px}
+.contact-small-note{color:#74877e;font-size:10px}
+.contact-direct-links{border-top-color:#e3eee7;padding-top:14px;gap:10px 20px}
+.contact-direct-links a{color:#167a49;font-size:11px}
+@media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:21px}.contact-form{padding:17px}.solar-pill{display:none}}
+@media(max-width:480px){.contact-panel{border-radius:18px}.contact-intro h2{font-size:28px}.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.solar-highlight{padding:12px;gap:9px}.solar-icon{flex-basis:34px;height:34px;font-size:21px}}

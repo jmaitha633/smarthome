@@ -26,7 +26,7 @@ HOW TO PUBLISH TO YOUR EXISTING GITHUB PAGES WEBSITE
 10. You can also use the Install app button on the website when your browser offers the installation prompt.
 
 PROFESSIONAL CONTACT SECTION
-The bottom of the website now says “Contact JK Engineering” and explains that users can ask about smart home systems, lighting systems, motor/door control, security/alarm systems, installation, maintenance and troubleshooting.
+The bottom of the website now says “Contact JK Engineering Solutions” and explains that users can ask about smart home systems, lighting systems, motor/door control, security/alarm systems, installation, maintenance and troubleshooting.
 Visitors can select a service and enquiry type, add an optional message, then choose Send by email or Continue on WhatsApp. Their selection and message are included in the draft; the site does not store the message.
 Email: jmaitha633@gmail.com
 WhatsApp: 0743 410 685 (opens https://wa.me/254743410685)
@@ -36,3 +36,6 @@ SAFETY / FUNCTION NOTES
 - Do not drive a motor, siren, relay load, or mains appliance directly from ESP32 GPIO pins.
 - Use suitable drivers, power supplies, protection, and door limit switches. Keep PIR alarm triggering local on the ESP32 so it can still work if internet fails.
 - Keep Firebase security rules and authentication properly configured; do not make the database publicly writable for convenience.
+
+
+JK Engineering Solutions contact section includes enquiries for clean solar energy systems and solar installation/maintenance, alongside smart home, lighting, motor and security services.

@@ -26,3 +26,6 @@ The `DATABASE_RULES.json` file is a starter example matching these paths. Publis
 
 ## Safety
 Use only low-voltage test lamps for early tests. Do not connect mains voltage to the ESP32 or breadboard. Do not drive a motor, relay coil or siren directly from a GPIO. Use suitable drivers, fuses, limit switches, motor timeout and an emergency/manual stop. Keep local PIR-to-alarm logic working if internet access fails.
+
+
+JK Engineering Solutions contact section includes enquiries for clean solar energy systems and solar installation/maintenance, alongside smart home, lighting, motor and security services.
