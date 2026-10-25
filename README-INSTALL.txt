@@ -6,7 +6,8 @@ WHAT IS INCLUDED
 - style.css: original dashboard styling preserved
 - firebase-config.js: existing Firebase web configuration preserved
 - manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js, sw.js: installable Progressive Web App support
-- app-additions.css: styling for install button and contact section
+- app-additions.css: styling for install button and professional contact section
+- contact-form.js: service/enquiry selectors and email/WhatsApp message links
 - README.md, DATABASE_RULES.json, .nojekyll: existing supporting files (where present)
 
 IMPORTANT
@@ -16,7 +17,7 @@ HOW TO PUBLISH TO YOUR EXISTING GITHUB PAGES WEBSITE
 1. Download this ZIP and choose Extract All on Windows.
 2. Open https://github.com/jmaitha633/smarthome
 3. Make a backup of your current repository files before replacing anything.
-4. Upload the files from the extracted folder to the repository root (not the enclosing folder). Replace the matching existing files with the package versions, especially index.html. Add the new files app-additions.css, manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js and sw.js.
+4. Upload the files from the extracted folder to the repository root (not the enclosing folder). Replace the matching existing files with the package versions, especially index.html. Add the new files app-additions.css, contact-form.js, manifest.webmanifest, icon.svg, icon-192.png, icon-512.png, pwa.js and sw.js.
 5. Keep all files in the same root folder as index.html. Do not rename script.js or firebase-config.js.
 6. Commit changes to the main branch.
 7. Wait for GitHub Pages to finish deploying, then open https://jmaitha633.github.io/smarthome/ and refresh.
@@ -24,7 +25,9 @@ HOW TO PUBLISH TO YOUR EXISTING GITHUB PAGES WEBSITE
 9. On Windows Edge: menu (...) > Apps > Install this site as an app. Chrome may offer an install icon/menu option when the site is installable.
 10. You can also use the Install app button on the website when your browser offers the installation prompt.
 
-CONTACT DETAILS ADDED TO THE WEBSITE
+PROFESSIONAL CONTACT SECTION
+The bottom of the website now says “Contact JK Engineering” and explains that users can ask about smart home systems, lighting systems, motor/door control, security/alarm systems, installation, maintenance and troubleshooting.
+Visitors can select a service and enquiry type, add an optional message, then choose Send by email or Continue on WhatsApp. Their selection and message are included in the draft; the site does not store the message.
 Email: jmaitha633@gmail.com
 WhatsApp: 0743 410 685 (opens https://wa.me/254743410685)
 

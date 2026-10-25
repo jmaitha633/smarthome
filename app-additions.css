@@ -10,3 +10,28 @@
 .contact-link{color:#4c64df;text-decoration:none;font-size:11px;font-weight:750;overflow-wrap:anywhere}
 .contact-link:hover{text-decoration:underline}
 @media(max-width:600px){.install-app-button{padding:8px 9px;font-size:10px}.contact-panel{padding:17px}.contact-actions{min-width:0;width:100%}}
+
+/* Professional JK Engineering contact and enquiry selector */
+.contact-panel{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(320px,1.18fr);align-items:start;gap:28px;margin-top:22px;padding:26px;background:linear-gradient(135deg,#fff 0%,#f7f9ff 100%);border:1px solid #e4eaf5;border-radius:18px;box-shadow:0 12px 34px #15243c0b}
+.contact-intro h2{font-size:22px;line-height:1.25;margin:0;color:#172844;letter-spacing:-.55px}
+.contact-intro p:not(.eyebrow){max-width:470px;color:#68758b;font-size:13px;line-height:1.75;margin:11px 0 0}
+.contact-trust-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.contact-trust-points span{font-size:10px;font-weight:750;color:#4354a3;background:#edf1ff;padding:7px 9px;border-radius:20px}
+.contact-form{display:flex;flex-direction:column;gap:13px;min-width:0}
+.contact-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.contact-field label{font-size:11px;font-weight:800;color:#34435d}
+.contact-field select,.contact-field textarea{width:100%;box-sizing:border-box;border:1px solid #dbe2ee;border-radius:10px;background:#fff;color:#26354d;font:inherit;font-size:12px;padding:11px 12px;outline:none}
+.contact-field select:focus,.contact-field textarea:focus{border-color:#6578e8;box-shadow:0 0 0 3px #6578e81c}
+.contact-field textarea{resize:vertical;min-height:82px;line-height:1.5}
+.contact-send-actions{display:flex;flex-wrap:wrap;gap:10px}
+.contact-send-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:12px 15px;font-size:11px;font-weight:800;cursor:pointer;transition:transform .15s ease,opacity .15s ease}
+.contact-send-button:hover{transform:translateY(-1px);opacity:.93}
+.contact-email-button{background:#4358d7;color:#fff}
+.contact-whatsapp-button{background:#167b50;color:#fff}
+.contact-small-note{margin:0;color:#8490a3;font-size:10px;line-height:1.6}
+.contact-direct-links{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:11px;border-top:1px solid #e8edf5}
+.contact-direct-links a{font-size:11px;color:#4b5fd1;text-decoration:none;font-weight:700;overflow-wrap:anywhere}
+.contact-direct-links a:hover{text-decoration:underline}
+@media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:20px}.contact-field-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.contact-intro h2{font-size:20px}}
