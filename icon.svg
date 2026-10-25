@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0b1220"/>
+  <path d="M76 238 256 90l180 148" fill="none" stroke="#70e1bf" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M124 224v190h264V224" fill="#172844" stroke="#70e1bf" stroke-width="22" stroke-linejoin="round"/>
+  <text x="256" y="334" font-family="Arial,sans-serif" font-size="104" font-weight="800" text-anchor="middle" fill="#ffffff">JK</text>
+</svg>

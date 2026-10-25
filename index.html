@@ -4,15 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b1220">
-  <title>SmartNest | Home Security & Automation</title>
+  <title>JKSmartNest | Smart Home Security & Automation</title>
+  <meta name="description" content="JKSmartNest smart home lighting, security and model door controls.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="app-additions.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#" aria-label="SmartNest home">
+      <a class="brand" href="#" aria-label="JKSmartNest home">
         <span class="brand-mark">⌂</span>
-        <span><strong>SmartNest</strong><small>HOME SYSTEM</small></span>
+        <span><strong>JKSmartNest</strong><small>SMART HOME SYSTEM</small></span>
       </a>
       <div class="side-label">WORKSPACE</div>
       <nav class="nav">
@@ -36,7 +41,7 @@
         </div>
         <div class="top-actions">
           <span class="demo-pill"><span></span> FIREBASE SETUP</span>
-          <div class="avatar">SN</div>
+          <button class="install-app-button" id="install-app-button" type="button" hidden>⬇ Install app</button><div class="avatar">JK</div>
         </div>
       </header>
 
@@ -147,10 +152,18 @@
         </div>
       </section>
 
-      <footer><span>SmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Firebase web controls · ESP32 firmware required</span></footer>
+      <footer class="site-footer"><span>JKJKSmartNest · Smart Home Security & Automation</span><span><span class="footer-dot"></span> Firebase web controls · ESP32 firmware required</span></footer>
+      <section class="contact-panel" id="contact" aria-labelledby="contact-heading">
+        <div><p class="eyebrow">NEED HELP?</p><h2 id="contact-heading">Contact JKSmartNest</h2><p>Questions about the smart home website or project? Get in touch.</p></div>
+        <div class="contact-actions">
+          <a class="contact-link" href="mailto:jmaitha633@gmail.com">✉ Email: jmaitha633@gmail.com</a>
+          <a class="contact-link" href="https://wa.me/254743410685" target="_blank" rel="noopener noreferrer">☏ WhatsApp: 0743 410 685</a>
+        </div>
+      </section>
     </main>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="pwa.js" defer></script>
   <script type="module" src="script.js"></script>
 </body>
 </html>

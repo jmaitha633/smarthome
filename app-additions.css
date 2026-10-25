@@ -1,0 +1,12 @@
+/* JKSmartNest install and contact additions; existing dashboard styles remain intact. */
+.install-app-button{border:1px solid #dce4f0;background:#fff;color:#172844;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+.install-app-button[hidden]{display:none}
+.install-app-button:hover{background:#f0f4fb}
+.contact-panel{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;margin-top:18px;padding:22px;background:#fff;border:1px solid #edf0f6;border-radius:15px;box-shadow:0 8px 25px #15243c08}
+.contact-panel h2{margin:0;font-size:18px;letter-spacing:-.4px;color:#172844}
+.contact-panel p:not(.eyebrow){margin:7px 0 0;color:#8792a5;font-size:11px;line-height:1.6}
+.contact-panel .eyebrow{margin:0 0 7px;color:#9ba6b7;font-size:9px;font-weight:800;letter-spacing:1.1px}
+.contact-actions{display:flex;flex-direction:column;gap:9px;min-width:250px}
+.contact-link{color:#4c64df;text-decoration:none;font-size:11px;font-weight:750;overflow-wrap:anywhere}
+.contact-link:hover{text-decoration:underline}
+@media(max-width:600px){.install-app-button{padding:8px 9px;font-size:10px}.contact-panel{padding:17px}.contact-actions{min-width:0;width:100%}}
