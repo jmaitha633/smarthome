@@ -1,4 +1,4 @@
-/* JKSmartNest upgrade styles; keeps the existing style.css and adds new feature panels. */
+/* JKSmartNest upgrade styles; keeps existing style.css and adds dashboard improvements. */
 .sensor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
 .sensor-tile{padding:12px;border:1px solid var(--line);border-radius:11px;background:#fbfcfe;min-width:0}
 .sensor-tile span,.energy-grid article span{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}
@@ -31,3 +31,15 @@
 @media(max-width:1100px){.energy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:760px){.sidebar{position:static;width:100%;padding:15px}.brand{padding:0 8px 15px}.nav{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar-bottom{margin-top:15px}.main-content{margin-left:0;padding:22px 15px}.topbar{flex-direction:column}.welcome-panel{padding:24px}.house-art{opacity:.22;right:-70px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lights-grid{grid-template-columns:1fr}.energy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.access-actions{align-items:flex-start;flex-direction:column}.updated-label{display:none}}
 @media(max-width:420px){.stats-grid,.energy-grid,.sensor-grid{grid-template-columns:1fr}.security-controls{grid-template-columns:1fr}.topbar h1{font-size:24px}}
+
+/* Dashboard polish: quick actions, local clock, focus visibility and touch targets. */
+.live-clock{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.quick-light-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#f8faf9}
+.quick-light-actions>span{font-size:10px;font-weight:800;letter-spacing:.45px;color:var(--muted);text-transform:uppercase;margin-right:auto}
+.quick-light-actions .secondary-button{padding:9px 12px;min-height:36px}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e7b94f;outline-offset:3px}
+.nav-link{border-radius:10px}
+.nav-link.active{background:rgba(45,190,127,.15);color:#d5f8e6}
+button,.contact-cta-button{min-height:36px}
+@media(max-width:760px){.top-actions{width:100%;justify-content:space-between;flex-wrap:wrap}.live-clock{order:3;width:100%}.quick-light-actions{align-items:stretch}.quick-light-actions>span{width:100%;margin-bottom:2px}.quick-light-actions .secondary-button{flex:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
