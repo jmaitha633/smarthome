@@ -47,3 +47,108 @@ body{background:var(--bg);color:var(--ink)}
 footer{color:#71857a}
 .footer-dot,.status-dot{background:#1ca765}
 @media(prefers-reduced-motion:no-preference){.primary-button,.nav-link,.stat-card,.panel{transition:background .2s,border-color .2s,box-shadow .2s,color .2s}}
+
+/* =========================================
+   JK ENGINEERING SOLUTIONS
+   JKSmartNest CCTV MOBILE UPDATE
+   ========================================= */
+
+/* Keep CCTV navigation link visible */
+.nav-link[href="cctv.html"] {
+    color: #ffffff;
+    background: #167c49;
+    border: 1px solid #22a568;
+}
+
+.nav-link[href="cctv.html"]:hover {
+    background: #125f39;
+}
+
+/* Floating CCTV button for phones and computers */
+.mobile-cctv-button {
+    position: fixed;
+    right: 16px;
+    bottom: 20px;
+    z-index: 99999;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 48px;
+    padding: 14px 20px;
+
+    background: #16a34a;
+    color: #ffffff !important;
+    border: 2px solid #16a34a;
+    border-radius: 12px;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none !important;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-cctv-button:hover {
+    background: #15803d;
+    border-color: #15803d;
+    color: #ffffff !important;
+}
+
+.mobile-cctv-button:active {
+    transform: scale(0.97);
+}
+
+/* Show the navigation on mobile */
+@media (max-width: 760px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 15px 17px;
+        display: block;
+    }
+
+    .side-label {
+        display: block;
+        padding: 18px 5px 8px;
+    }
+
+    .nav {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+        margin-top: 8px;
+    }
+
+    .nav-link {
+        display: flex !important;
+        align-items: center;
+        min-width: 0;
+        padding: 12px 9px;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    .sidebar-bottom {
+        display: flex;
+        margin-top: 12px;
+    }
+
+    .mobile-cctv-button {
+        right: 12px;
+        bottom: max(14px, env(safe-area-inset-bottom));
+        min-height: 48px;
+        padding: 14px 17px;
+        font-size: 14px;
+    }
+
+    /* Leave space so the floating button does not cover the footer */
+    .main-content {
+        padding-bottom: 85px;
+    }
+}
