@@ -69,5 +69,68 @@
 </div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script type="module" src="script.js"></script>
  
+<script>
+(function () {
+  const main = document.querySelector(".main-content");
+  if (!main) return;
+
+  function showSection() {
+    // Restore every element before choosing a section.
+    main.querySelectorAll("[hidden]").forEach(el => {
+      el.hidden = false;
+    });
+
+    main.querySelectorAll("*").forEach(el => {
+      if (el.hidden) el.hidden = false;
+    });
+
+    const id = location.hash.slice(1) || "overview";
+
+    // Overview shows only its main overview content.
+    if (id === "overview") {
+      const keep = [
+        ".topbar",
+        ".welcome-panel",
+        ".section-heading",
+        ".stats-grid"
+      ];
+
+      Array.from(main.children).forEach(el => {
+        el.hidden = !keep.some(selector => el.matches(selector));
+      });
+      return;
+    }
+
+    const target = document.getElementById(id);
+    if (!target || !main.contains(target)) return;
+
+    // Keep the selected section and its parent containers.
+    let current = target;
+
+    while (current && current !== main) {
+      Array.from(current.parentElement.children).forEach(sibling => {
+        if (sibling !== current) sibling.hidden = true;
+      });
+      current = current.parentElement;
+    }
+
+    // Keep the page heading visible.
+    const topbar = main.querySelector(".topbar");
+    if (topbar && target !== topbar) topbar.hidden = false;
+
+    // Highlight the matching sidebar button.
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + id
+      );
+    });
+  }
+
+  window.addEventListener("hashchange", showSection);
+  showSection();
+})();
+</script>
+
  </body></html>
 </body></html>
