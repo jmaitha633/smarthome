@@ -1,76 +1,33 @@
-/* JKSmartNest install and contact additions; existing dashboard styles remain intact. */
-.install-app-button{border:1px solid #dce4f0;background:#fff;color:#172844;border-radius:10px;padding:10px 12px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
-.install-app-button[hidden]{display:none}
-.install-app-button:hover{background:#f0f4fb}
-.contact-panel{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;margin-top:18px;padding:22px;background:#fff;border:1px solid #edf0f6;border-radius:15px;box-shadow:0 8px 25px #15243c08}
-.contact-panel h2{margin:0;font-size:18px;letter-spacing:-.4px;color:#172844}
-.contact-panel p:not(.eyebrow){margin:7px 0 0;color:#8792a5;font-size:11px;line-height:1.6}
-.contact-panel .eyebrow{margin:0 0 7px;color:#9ba6b7;font-size:9px;font-weight:800;letter-spacing:1.1px}
-.contact-actions{display:flex;flex-direction:column;gap:9px;min-width:250px}
-.contact-link{color:#4c64df;text-decoration:none;font-size:11px;font-weight:750;overflow-wrap:anywhere}
-.contact-link:hover{text-decoration:underline}
-@media(max-width:600px){.install-app-button{padding:8px 9px;font-size:10px}.contact-panel{padding:17px}.contact-actions{min-width:0;width:100%}}
-
-/* Professional JK Engineering contact and enquiry selector */
-.contact-panel{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(320px,1.18fr);align-items:start;gap:28px;margin-top:22px;padding:26px;background:linear-gradient(135deg,#fff 0%,#f7f9ff 100%);border:1px solid #e4eaf5;border-radius:18px;box-shadow:0 12px 34px #15243c0b}
-.contact-intro h2{font-size:22px;line-height:1.25;margin:0;color:#172844;letter-spacing:-.55px}
-.contact-intro p:not(.eyebrow){max-width:470px;color:#68758b;font-size:13px;line-height:1.75;margin:11px 0 0}
-.contact-trust-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
-.contact-trust-points span{font-size:10px;font-weight:750;color:#4354a3;background:#edf1ff;padding:7px 9px;border-radius:20px}
-.contact-form{display:flex;flex-direction:column;gap:13px;min-width:0}
-.contact-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.contact-field{display:flex;flex-direction:column;gap:7px;min-width:0}
-.contact-field label{font-size:11px;font-weight:800;color:#34435d}
-.contact-field select,.contact-field textarea{width:100%;box-sizing:border-box;border:1px solid #dbe2ee;border-radius:10px;background:#fff;color:#26354d;font:inherit;font-size:12px;padding:11px 12px;outline:none}
-.contact-field select:focus,.contact-field textarea:focus{border-color:#6578e8;box-shadow:0 0 0 3px #6578e81c}
-.contact-field textarea{resize:vertical;min-height:82px;line-height:1.5}
-.contact-send-actions{display:flex;flex-wrap:wrap;gap:10px}
-.contact-send-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:10px;padding:12px 15px;font-size:11px;font-weight:800;cursor:pointer;transition:transform .15s ease,opacity .15s ease}
-.contact-send-button:hover{transform:translateY(-1px);opacity:.93}
-.contact-email-button{background:#4358d7;color:#fff}
-.contact-whatsapp-button{background:#167b50;color:#fff}
-.contact-small-note{margin:0;color:#8490a3;font-size:10px;line-height:1.6}
-.contact-direct-links{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:11px;border-top:1px solid #e8edf5}
-.contact-direct-links a{font-size:11px;color:#4b5fd1;text-decoration:none;font-weight:700;overflow-wrap:anywhere}
-.contact-direct-links a:hover{text-decoration:underline}
-@media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:20px}.contact-field-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.contact-intro h2{font-size:20px}}
-
-
-/* Premium JK Engineering + clean solar energy contact experience */
-.contact-panel{position:relative;isolation:isolate;overflow:hidden;grid-template-columns:minmax(260px,.9fr) minmax(330px,1.1fr);gap:32px;margin-top:28px;padding:clamp(22px,3.2vw,38px);border:1px solid #d9e8df;border-radius:24px;background:linear-gradient(125deg,#f1fbf5 0%,#ffffff 46%,#f3f7ff 100%);box-shadow:0 22px 55px rgba(16,54,38,.10)}
-.contact-panel:before{content:"";position:absolute;z-index:-1;left:-90px;top:-115px;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle,rgba(48,174,104,.17),rgba(48,174,104,0) 70%)}
-.contact-panel:after{content:"";position:absolute;z-index:-1;right:-85px;bottom:-125px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(250,181,50,.15),rgba(250,181,50,0) 70%)}
-.contact-intro .eyebrow{display:flex;align-items:center;gap:8px;color:#16804c;font-size:10px;letter-spacing:1.45px;margin-bottom:13px}
-.solar-sun{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#fff0c6;color:#b77700;font-size:18px;box-shadow:0 4px 12px #d7a83c24}
-.contact-intro h2{font-size:clamp(27px,3vw,36px);line-height:1.12;letter-spacing:-1.2px;color:#102b24}
-.contact-intro h2 span{color:#16804c}
-.contact-intro p:not(.eyebrow){color:#536b63;font-size:13px;line-height:1.8;margin-top:14px}
-.contact-trust-points{gap:8px;margin-top:19px}
-.contact-trust-points span{display:inline-flex;align-items:center;gap:5px;border:1px solid #d5eadc;background:#e9f7ed;color:#17673e;border-radius:9px;padding:8px 10px;font-size:10px}
-.solar-highlight{display:flex;align-items:flex-start;gap:12px;position:relative;margin-top:21px;padding:15px;border:1px solid #f2d98d;border-radius:15px;background:linear-gradient(115deg,#fff8df,#fffdf4);box-shadow:0 8px 20px rgba(162,119,16,.06)}
-.solar-icon{display:grid;place-items:center;flex:0 0 39px;height:39px;border-radius:12px;background:linear-gradient(145deg,#ffc94f,#f5a900);color:#553900;font-size:24px;box-shadow:0 5px 12px #e2ad2b30}
-.solar-highlight strong{display:block;color:#4d3c10;font-size:12px;line-height:1.5}
-.solar-highlight p{margin:4px 0 0!important;color:#75663b!important;font-size:11px!important;line-height:1.65!important}
-.solar-pill{align-self:flex-start;white-space:nowrap;margin-left:auto;border-radius:6px;background:#e4f4e7;color:#177044;font-size:8px;font-weight:900;letter-spacing:.6px;padding:6px 7px}
-.contact-form{position:relative;padding:22px;border:1px solid rgba(218,230,223,.95);border-radius:18px;background:rgba(255,255,255,.9);box-shadow:0 14px 35px rgba(22,54,40,.07);backdrop-filter:blur(8px);gap:15px}
-.contact-field label{color:#213e32;font-size:11px}
-.contact-field select,.contact-field textarea{border-color:#d7e5dc;border-radius:11px;padding:12px 13px;color:#243b32;background:#fbfdfb;font-size:12px;transition:border-color .2s,box-shadow .2s,background .2s}
-.contact-field select:focus,.contact-field textarea:focus{border-color:#1f9b5b;box-shadow:0 0 0 4px rgba(31,155,91,.12);background:#fff}
-.contact-send-actions{gap:11px}
-.contact-send-button{min-height:44px;border-radius:11px;padding:13px 16px;font-size:11px;box-shadow:0 7px 16px rgba(15,45,32,.09)}
-.contact-email-button{background:linear-gradient(120deg,#174e39,#16804c);color:#fff}
-.contact-whatsapp-button{background:linear-gradient(120deg,#16804c,#22a85e);color:#fff}
-.contact-send-button:focus-visible{outline:3px solid #f1bf42;outline-offset:3px}
-.contact-small-note{color:#74877e;font-size:10px}
-.contact-direct-links{border-top-color:#e3eee7;padding-top:14px;gap:10px 20px}
-.contact-direct-links a{color:#167a49;font-size:11px}
-@media(max-width:760px){.contact-panel{grid-template-columns:1fr;padding:20px;gap:21px}.contact-form{padding:17px}.solar-pill{display:none}}
-@media(max-width:480px){.contact-panel{border-radius:18px}.contact-intro h2{font-size:28px}.contact-field-grid{grid-template-columns:1fr}.contact-send-actions{flex-direction:column}.contact-send-button{width:100%;box-sizing:border-box}.solar-highlight{padding:12px;gap:9px}.solar-icon{flex-basis:34px;height:34px;font-size:21px}}
-
-
-/* Compact dashboard footer CTA: detailed information lives on contact.html */
-.contact-cta{display:flex;align-items:center;gap:18px;margin-top:28px;padding:22px 24px;border:1px solid #d7e9dc;border-radius:18px;background:linear-gradient(110deg,#e8f6eb,#ffffff 60%,#fff8e2);box-shadow:0 12px 30px rgba(16,54,38,.055)}
-.contact-cta-icon{display:grid;place-items:center;flex:0 0 52px;height:52px;border-radius:15px;background:linear-gradient(145deg,#ffdc76,#f5b72d);color:#624700;font-size:29px;box-shadow:0 7px 15px #d5a63224}
-.contact-cta-copy{flex:1;min-width:0}.contact-cta-copy .eyebrow{color:#16804c;font-size:9px;letter-spacing:1.35px;margin:0 0 6px}.contact-cta-copy h2{font-size:18px;letter-spacing:-.45px;margin:0;color:#102b24}.contact-cta-copy p{font-size:11px;line-height:1.75;color:#5d7466;margin:6px 0 0}.contact-cta-copy strong{color:#176c41}.contact-cta-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex:0 0 auto;background:linear-gradient(120deg,#174c35,#16804c);color:#fff;text-decoration:none;padding:13px 16px;border-radius:11px;font-size:11px;font-weight:800;box-shadow:0 7px 16px #124b3020}.contact-cta-button:hover{background:#10653b;transform:translateY(-1px)}
-@media(max-width:760px){.contact-cta{align-items:flex-start;flex-wrap:wrap;padding:18px;gap:13px}.contact-cta-icon{flex-basis:43px;height:43px;font-size:24px}.contact-cta-copy{flex-basis:calc(100% - 60px)}.contact-cta-copy h2{font-size:17px}.contact-cta-button{width:100%;box-sizing:border-box}}
+/* JKSmartNest upgrade styles; keeps the existing style.css and adds new feature panels. */
+.sensor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.sensor-tile{padding:12px;border:1px solid var(--line);border-radius:11px;background:#fbfcfe;min-width:0}
+.sensor-tile span,.energy-grid article span{display:block;font-size:10px;color:var(--muted);margin-bottom:8px}
+.sensor-tile strong{font-size:12px;overflow-wrap:anywhere}
+.sensor-state.alerting{color:#c93434}
+.hazard-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#fff0e9;color:#c74424;font-size:21px;font-weight:900}
+.safety-banner{padding:14px;border-radius:12px;background:#f3f7f5;border:1px solid #dfeee6;margin:16px 0 12px}
+.safety-banner strong{font-size:12px}.safety-banner p{font-size:10px;color:var(--muted);line-height:1.5;margin:5px 0 0}
+.safety-banner.hazard-active{background:#fff0ef;border-color:#f2c3bf;color:#a32222}
+.energy-panel,.history-panel{margin-top:20px}
+.energy-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.energy-grid article{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe;min-width:0}
+.energy-grid article strong{display:block;font-size:22px;letter-spacing:-.5px;overflow-wrap:anywhere}
+.energy-grid article small{display:block;color:var(--muted);font-size:10px;margin-top:7px}
+.energy-meter{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:12px}
+.energy-meter>div:first-child{display:flex;justify-content:space-between;gap:12px;font-size:11px;margin-bottom:10px}
+.meter-track{height:10px;background:#e9edf3;border-radius:99px;overflow:hidden}
+#battery-meter-fill{height:100%;width:0;background:#19a878;border-radius:99px;transition:width .3s}
+#battery-meter-fill.low{background:#df9a28}
+.table-wrap{width:100%;overflow-x:auto}
+.event-table{width:100%;border-collapse:collapse;font-size:11px;min-width:520px}
+.event-table th,.event-table td{text-align:left;padding:12px;border-bottom:1px solid var(--line)}
+.event-table th{font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+.access-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font-size:10px;color:var(--muted)}
+.login-panel{margin-bottom:20px;border:1px solid #cbd5ff}
+.login-panel form{display:grid;gap:9px;max-width:420px}
+.login-panel label{font-size:11px;font-weight:700}
+.login-panel input{padding:11px;border:1px solid var(--line);border-radius:9px}
+.login-panel button{justify-self:start}
+@media(max-width:1100px){.energy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.content-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){.sidebar{position:static;width:100%;padding:15px}.brand{padding:0 8px 15px}.nav{grid-template-columns:repeat(2,minmax(0,1fr))}.sidebar-bottom{margin-top:15px}.main-content{margin-left:0;padding:22px 15px}.topbar{flex-direction:column}.welcome-panel{padding:24px}.house-art{opacity:.22;right:-70px}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lights-grid{grid-template-columns:1fr}.energy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.access-actions{align-items:flex-start;flex-direction:column}.updated-label{display:none}}
+@media(max-width:420px){.stats-grid,.energy-grid,.sensor-grid{grid-template-columns:1fr}.security-controls{grid-template-columns:1fr}.topbar h1{font-size:24px}}

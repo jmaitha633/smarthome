@@ -1,140 +1,181 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import { getDatabase, ref, set, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getDatabase, ref, set, onValue, push, serverTimestamp, query, limitToLast } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 import { firebaseConfig } from "./firebase-config.js";
 
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
-const lightPaths = { L1: "light1", L2: "light2", L3: "light3" };
-let auth, db, currentUser = null, armed = false, doorOpen = false;
-const lightStates = { L1: false, L2: false, L3: false };
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const lightPaths = { L1:"light1", L2:"light2", L3:"light3" };
+let auth, db, currentUser = null, armed = false;
+const lightStates = { L1:false, L2:false, L3:false };
+let latestStatus = {};
 let toastTimer;
+
 function toast(message) {
   const el = $("#toast"); if (!el) return;
   el.textContent = message; el.classList.add("show"); clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove("show"), 3000);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 3500);
 }
-function connection(label, online) {
-  const strong = $(".sidebar-bottom strong"), small = $(".sidebar-bottom small"), pill = $(".demo-pill");
-  if (strong) strong.textContent = label;
-  if (small) small.textContent = online ? "Firebase connected" : "Sign in to connect";
-  if (pill) { pill.innerHTML = `<span></span> ${online ? "FIREBASE CONNECTED" : "SIGN IN REQUIRED"}`; }
+function connection(title, detail, online=false) {
+  $("#connection-title").textContent = title;
+  $("#connection-detail").textContent = detail;
+  $("#connection-pill").innerHTML = `<span></span> ${online ? "CONNECTED" : "NOT CONNECTED"}`;
 }
 function renderLights() {
-  let count = 0;
-  Object.entries(lightStates).forEach(([id, value]) => {
-    const card = document.querySelector(`[data-light="${id}"]`), button = document.querySelector(`[data-toggle-light="${id}"]`);
-    if (!card || !button) return;
-    card.classList.toggle("is-on", value); button.setAttribute("aria-pressed", String(value));
-    const label = card.querySelector(".toggle-label"); if (label) label.textContent = value ? "Turn off" : "Turn on";
-    const state = $(`#${id}-state`); if (state) state.textContent = value ? "ON" : "OFF";
-    if (value) count++;
+  let count=0;
+  Object.entries(lightStates).forEach(([id,on])=>{
+    const card=document.querySelector(`[data-light="${id}"]`), btn=document.querySelector(`[data-toggle-light="${id}"]`);
+    if(!card||!btn)return;
+    card.classList.toggle("is-on",on); btn.setAttribute("aria-pressed",String(on));
+    card.querySelector(".toggle-label").textContent=on?"Turn off":"Turn on";
+    $(`#${id}-state`).textContent=on?"ON":"OFF"; if(on)count++;
   });
-  if ($("#lights-on-count")) $("#lights-on-count").textContent = count;
-  if ($("#lights-on-count-small")) $("#lights-on-count-small").textContent = count;
+  $("#lights-on-count").textContent=count; $("#lights-on-count-small").textContent=count;
 }
-async function writeControl(key, value) {
-  if (!currentUser) { toast("Please sign in first."); showLogin(); return false; }
+async function writeControl(key,value) {
+  if(!currentUser){toast("Please sign in first."); showLogin(); return false;}
   try {
-    await set(ref(db, `controls/${key}`), value);
-    await set(ref(db, "controlsMeta/lastCommand"), { key, value, by: currentUser.uid, at: serverTimestamp() });
-    toast(`${key} updated in Firebase.`); return true;
-  } catch (e) { console.error(e); toast(`Firebase write failed: ${e.code || e.message}`); return false; }
+    await set(ref(db,`controls/${key}`),value);
+    await set(ref(db,"controlsMeta/lastCommand"),{key,value,by:currentUser.uid,at:serverTimestamp()});
+    toast(`Command sent: ${key}`); return true;
+  } catch(e) { console.error(e); toast(`Firebase command failed: ${e.code||e.message}`); return false; }
 }
-async function setLight(id, value) {
-  const key = lightPaths[id]; if (!key) return;
-  if (await writeControl(key, value)) { lightStates[id] = value; renderLights(); }
+async function setLight(id,value) {
+  if(await writeControl(lightPaths[id],value)){lightStates[id]=value;renderLights();}
 }
 function renderSecurity() {
-  if ($("#security-stat")) $("#security-stat").textContent = armed ? "Armed" : "Disarmed";
-  if ($("#security-stat-note")) $("#security-stat-note").textContent = armed ? "Motion monitoring enabled" : "Monitoring is paused";
-  if ($("#security-status-title")) $("#security-status-title").textContent = armed ? "System armed" : "System disarmed";
-  if ($("#security-status-text")) $("#security-status-text").textContent = armed ? "Security is armed in Firebase." : "Security system is disarmed.";
-  if ($("#security-status-box")) $("#security-status-box").classList.toggle("armed", armed);
-  if ($("#security-status-icon")) $("#security-status-icon").textContent = armed ? "!" : "✓";
-  if ($("#arm-button")) $("#arm-button").disabled = armed;
-  if ($("#disarm-button")) $("#disarm-button").disabled = !armed;
+  $("#security-stat").textContent=typeof latestStatus.online==="boolean"&&!latestStatus.online?"Offline":(armed?"Armed":"Disarmed");
+  $("#security-stat-note").textContent=armed?"Monitoring enabled":"Monitoring paused";
+  $("#security-status-title").textContent=latestStatus.alarm?"ALARM ACTIVE":(armed?"System armed":"System disarmed");
+  $("#security-status-text").textContent=latestStatus.alarmReason|| (latestStatus.alarm?"Check the property and follow your safety plan.":(armed?"Sensors are monitored by the local controller.":"Security is disarmed."));
+  $("#security-status-box").classList.toggle("armed",armed||!!latestStatus.alarm);
+  $("#security-status-icon").textContent=latestStatus.alarm?"!":(armed?"!":"✓");
+  $("#arm-button").disabled=armed; $("#disarm-button").disabled=!armed;
 }
-function renderDoor() {
-  const label = doorOpen ? "Open" : "Closed / unknown";
-  if ($("#door-stat")) $("#door-stat").textContent = label;
-  if ($("#door-status-title")) $("#door-status-title").textContent = doorOpen ? "Door reported open" : "Door closed / status unknown";
-  if ($("#door-status-copy")) $("#door-status-copy").textContent = "Door sensor status is reported by the ESP32 when firmware is connected.";
+function valText(v,yes="Detected",no="Clear") { return typeof v==="boolean"?(v?yes:no):"Unknown"; }
+function setState(id,text,alert=false) {
+  const el=$(id); if(!el)return; el.textContent=text; el.classList.toggle("alerting",alert);
+}
+function renderStatus(s={}) {
+  latestStatus=s;
+  setState("#sensor-pir",valText(s.motion,"Motion","No motion"),!!s.motion);
+  setState("#sensor-door",valText(s.doorOpen,"Open","Closed"),!!s.doorOpen);
+  setState("#door-stat",typeof s.doorOpen==="boolean"?(s.doorOpen?"Open":"Closed"):"Unknown",!!s.doorOpen);
+  $("#door-stat-note").textContent=typeof s.doorOpen==="boolean"?"Contact sensor reporting":"Waiting for contact sensor";
+  setState("#sensor-distance",Number.isFinite(Number(s.distanceCm))?`${Number(s.distanceCm).toFixed(0)} cm`:"— cm");
+  setState("#sensor-tamper",valText(s.tamper,"Tampered","Secure"),!!s.tamper);
+  setState("#alarm-state",s.alarm?"ACTIVE":"Silent",!!s.alarm);
+  setState("#device-online",s.online===true?"Online":s.online===false?"Offline":"Unknown",s.online===false);
+  setState("#sensor-gas",s.gasAlarm===true?"HAZARD":(Number.isFinite(Number(s.gasRaw))?`Raw ${s.gasRaw}`:"Unknown"),!!s.gasAlarm);
+  setState("#sensor-flame",valText(s.flame,"Detected","Clear"),!!s.flame);
+  setState("#sensor-temp",Number.isFinite(Number(s.temperatureC))?`${Number(s.temperatureC).toFixed(1)} °C`:"— °C");
+  setState("#sensor-health",s.sensorFault?"FAULT":(s.sensorHealth||"Unknown"),!!s.sensorFault);
+  const hazard=!!(s.gasAlarm||s.flame||s.sensorFault);
+  $("#safety-banner").classList.toggle("hazard-active",hazard);
+  $("#safety-title").textContent=hazard?"HAZARD / SENSOR FAULT REPORTED":"No confirmed hazard reported";
+  $("#safety-copy").textContent=s.safetyMessage||(hazard?"Follow the site's emergency procedure. Local safety firmware must operate independently.":"Waiting for gas, smoke and flame telemetry.");
+  $("#solar-watts").textContent=Number.isFinite(Number(s.solarWatts))?`${Number(s.solarWatts).toFixed(1)} W`:"— W";
+  $("#solar-volts").textContent=`Voltage: ${Number.isFinite(Number(s.solarVolts))?Number(s.solarVolts).toFixed(2):"—"} V`;
+  $("#load-watts").textContent=Number.isFinite(Number(s.loadWatts))?`${Number(s.loadWatts).toFixed(1)} W`:"— W";
+  $("#load-amps").textContent=`Current: ${Number.isFinite(Number(s.loadAmps))?Number(s.loadAmps).toFixed(2):"—"} A`;
+  $("#battery-volts").textContent=Number.isFinite(Number(s.batteryVolts))?`${Number(s.batteryVolts).toFixed(2)} V`:"— V";
+  $("#battery-current").textContent=`Current: ${Number.isFinite(Number(s.batteryAmps))?Number(s.batteryAmps).toFixed(2):"—"} A`;
+  const soc=Number(s.batterySoc);
+  $("#battery-stat").textContent=Number.isFinite(soc)?`${Math.max(0,Math.min(100,soc)).toFixed(0)}%`:"—%";
+  $("#battery-soc").textContent=Number.isFinite(soc)?`${Math.max(0,Math.min(100,soc)).toFixed(0)}%`:"—%";
+  $("#battery-note").textContent=Number.isFinite(soc)?(soc<30?"Low reserve": "Battery telemetry received"):"No battery telemetry";
+  $("#load-shed-state").textContent=`Load shedding: ${typeof s.loadShed==="boolean"?(s.loadShed?"active":"inactive"):"unknown"}`;
+  $("#battery-meter-label").textContent=Number.isFinite(soc)?(soc<30?"Low reserve — conserve energy":"Reserve level reported"):"Waiting for telemetry";
+  $("#battery-meter-fill").style.width=Number.isFinite(soc)?`${Math.max(0,Math.min(100,soc))}%`:"0%";
+  $("#battery-meter-fill").classList.toggle("low",Number.isFinite(soc)&&soc<30);
+  $("#last-updated").textContent=s.lastSeen?`Last device update: ${new Date(s.lastSeen).toLocaleString()}`:"Waiting for device telemetry";
+  renderSecurity();
 }
 function showLogin() {
-  if ($("#firebase-login-panel")) return;
-  const panel = document.createElement("section"); panel.id = "firebase-login-panel"; panel.className = "panel";
-  panel.style.cssText = "position:relative;max-width:560px;margin:0 auto 22px;border:2px solid #4c6fff";
-  panel.innerHTML = `<div class="panel-heading"><div><p class="eyebrow">SECURE CONNECTION</p><h2>Sign in to control your home</h2></div></div><p class="panel-description">Use the email and password of a user created in Firebase Authentication.</p><form id="firebase-login-form"><label for="firebase-email">Firebase user email</label><input id="firebase-email" type="email" required autocomplete="username" placeholder="Email address" style="width:100%;padding:11px;border:1px solid #e3e8f0;border-radius:9px;margin-bottom:12px"><label for="firebase-password">Password</label><input id="firebase-password" type="password" required autocomplete="current-password" placeholder="Firebase user password" style="width:100%;padding:11px;border:1px solid #e3e8f0;border-radius:9px;margin-bottom:12px"><button class="primary-button" type="submit">Sign in</button><p id="firebase-login-message" aria-live="polite">Sign in to enable Firebase controls.</p></form>`;
-  const main = $(".main-content"); main.insertBefore(panel, main.firstChild);
-  $("#firebase-login-form").addEventListener("submit", async e => {
-    e.preventDefault(); const message = $("#firebase-login-message");
-    try { await signInWithEmailAndPassword(auth, $("#firebase-email").value.trim(), $("#firebase-password").value); message.textContent = "Signed in successfully."; }
-    catch (err) { message.textContent = `Sign-in failed: ${err.code || err.message}. Check Authentication and the user password.`; }
+  if($("#firebase-login-panel"))return;
+  const panel=document.createElement("section"); panel.id="firebase-login-panel"; panel.className="panel login-panel";
+  panel.innerHTML=`<div class="panel-heading"><div><p class="eyebrow">SECURE CONNECTION</p><h2>Sign in to control JKSmartNest</h2></div></div><p class="panel-description">Use an account created in Firebase Authentication. Do not share your password.</p><form id="firebase-login-form"><label for="firebase-email">Email</label><input id="firebase-email" type="email" required autocomplete="username" placeholder="Email address"><label for="firebase-password">Password</label><input id="firebase-password" type="password" required autocomplete="current-password" placeholder="Password"><button class="primary-button" type="submit">Sign in</button><p id="firebase-login-message" aria-live="polite"></p></form>`;
+  $(".main-content").insertBefore(panel,$(".main-content").firstChild);
+  $("#firebase-login-form").addEventListener("submit",async e=>{
+    e.preventDefault();const msg=$("#firebase-login-message");
+    try{await signInWithEmailAndPassword(auth,$("#firebase-email").value.trim(),$("#firebase-password").value);msg.textContent="Signed in successfully.";}
+    catch(err){msg.textContent=`Sign-in failed: ${err.code||err.message}`;}
   });
+}
+function normalizeCommand(raw) {
+  return raw.toLowerCase().replace(/[.,!?]/g,"").replace(/\s+/g," ").trim();
+}
+async function runCommand(raw) {
+  const c=normalizeCommand(raw);
+  const lightMatch=c.match(/\b(?:light\s*)?(l[123])\s+(on|off)\b/);
+  if(lightMatch) return setLight(lightMatch[1].toUpperCase(),lightMatch[2]==="on");
+  const on=/\b(all lights on|turn on all lights|lights on|light up the room|turn on the lights)\b/.test(c);
+  const off=/\b(all lights off|turn off all lights|lights off|turn off the lights)\b/.test(c);
+  if(on||off){await Promise.all(Object.keys(lightStates).map(id=>setLight(id,on)));return;}
+  if(/\b(secure the perimeter|arm system|arm security|activate security)\b/.test(c)){
+    if(await writeControl("armed",true)){armed=true;renderSecurity();} return;
+  }
+  if(/\b(disarm|disarm security|disable security)\b/.test(c)){
+    if(!currentUser){showLogin();toast("Sign in required.");return;}
+    if(!window.confirm("Confirm disarming the security system?"))return;
+    if(await writeControl("armed",false)){armed=false;renderSecurity();} return;
+  }
+  toast("Command not recognized. Try 'secure the perimeter', 'lights off', or 'L1 on'.");
 }
 function attachEvents() {
-  $$('[data-toggle-light]').forEach(button => button.addEventListener("click", () => {
-    const id = button.dataset.toggleLight; setLight(id, !lightStates[id]);
-  }));
-  $("#command-form")?.addEventListener("submit", e => {
-    e.preventDefault(); const input = $("#command-input");
-    const command = input.value.trim().toUpperCase().replace(/[.,!?]/g, "").replace(/\s+/g, " ");
-    const match = command.match(/\b(L[123])\s+(ON|OFF)\b/);
-    if (match) setLight(match[1], match[2] === "ON");
-    else if (/\b(ALL LIGHTS|EVERY LIGHT|LIGHTS)\s+ON\b/.test(command)) Promise.all(Object.keys(lightStates).map(id => setLight(id, true)));
-    else if (/\b(ALL LIGHTS|EVERY LIGHT|LIGHTS)\s+OFF\b/.test(command)) Promise.all(Object.keys(lightStates).map(id => setLight(id, false)));
-    else toast("Try L1 ON, L2 OFF, or ALL LIGHTS ON.");
-    input.value = "";
+  $$("[data-toggle-light]").forEach(b=>b.addEventListener("click",()=>setLight(b.dataset.toggleLight,!lightStates[b.dataset.toggleLight])));
+  $("#command-form").addEventListener("submit",e=>{e.preventDefault();const input=$("#command-input");runCommand(input.value);input.value="";});
+  $("#voice-button").addEventListener("click",()=>{
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){$("#voice-status").textContent="Browser speech recognition unavailable; type a command instead.";return;}
+    const rec=new SR();rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=1;
+    $("#voice-status").textContent="Listening…";$("#voice-button").disabled=true;
+    rec.onresult=e=>{const spoken=e.results[0][0].transcript;$("#voice-status").textContent=`Heard: “${spoken}”`;runCommand(spoken);};
+    rec.onerror=()=>$("#voice-status").textContent="Voice recognition failed. Type the command instead.";
+    rec.onend=()=>$("#voice-button").disabled=false;
+    try{rec.start();}catch{$("#voice-button").disabled=false;}
   });
-  $("#voice-button")?.addEventListener("click", () => {
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SR) { $("#voice-status").textContent = "Speech recognition unavailable; type a command instead."; return; }
-    const recognition = new SR(); recognition.lang = "en-US"; recognition.interimResults = false;
-    $("#voice-status").textContent = "Listening… say a light command."; $("#voice-button").disabled = true;
-    recognition.onresult = e => { const spoken = e.results[0][0].transcript; $("#voice-status").textContent = `Heard: “${spoken}”`; $("#command-input").value = spoken; $("#command-form").requestSubmit(); };
-    recognition.onerror = () => { $("#voice-status").textContent = "Voice recognition failed. Type the command instead."; };
-    recognition.onend = () => { $("#voice-button").disabled = false; }; try { recognition.start(); } catch { $("#voice-button").disabled = false; }
+  $("#arm-button").addEventListener("click",async()=>{if(await writeControl("armed",true)){armed=true;renderSecurity();}});
+  $("#disarm-button").addEventListener("click",async()=>{if(!window.confirm("Confirm disarming the security system?"))return;if(await writeControl("armed",false)){armed=false;renderSecurity();}});
+  $("#test-alert-button").addEventListener("click",async()=>{
+    if(!currentUser){showLogin();toast("Sign in to log a test event.");return;}
+    try{await push(ref(db,"dashboardTestEvents"),{type:"dashboard_test",message:"Dashboard test event only; no physical alarm was triggered.",by:currentUser.uid,at:serverTimestamp()});toast("Dashboard test event logged.");}
+    catch(e){toast(`Could not log event: ${e.code||e.message}`);}
   });
-  $("#arm-button")?.addEventListener("click", async () => { if (await writeControl("armed", true)) { armed = true; renderSecurity(); } });
-  $("#disarm-button")?.addEventListener("click", async () => { if (await writeControl("armed", false)) { armed = false; renderSecurity(); } });
-  $("#test-alert-button")?.addEventListener("click", () => toast("Test the PIR sensor locally on the ESP32; this button does not simulate a real sensor."));
-  const form = $("#door-form");
-  if (form) {
-    form.innerHTML = `<p class="form-hint">Model door commands are only requests. Test with a safe low-voltage setup, physical limit switches and a motor timeout.</p><div class="command-row"><button class="primary-button" id="unlock-door-command" type="button">Unlock model door</button><button class="secondary-button" id="lock-door-command" type="button">Lock model door</button></div>`;
-    $("#unlock-door-command").addEventListener("click", () => writeControl("door", "unlocked"));
-    $("#lock-door-command").addEventListener("click", () => writeControl("door", "locked"));
-  }
-  $("#lock-door-button")?.addEventListener("click", () => writeControl("door", "locked"));
+  $("#refresh-events").addEventListener("click",()=>loadAccessEvents());
+}
+function loadAccessEvents() {
+  if(!db||!currentUser)return;
+  onValue(query(ref(db,"accessEvents"),limitToLast(12)),snap=>{
+    const body=$("#access-events");body.replaceChildren();const items=[];
+    snap.forEach(child=>items.push({id:child.key,...child.val()}));
+    items.reverse();
+    if(!items.length){body.innerHTML='<tr><td colspan="4">No access events received yet.</td></tr>';return;}
+    for(const ev of items){
+      const tr=document.createElement("tr");
+      const time=ev.timestamp?new Date(typeof ev.timestamp==="number"?ev.timestamp:Date.parse(ev.timestamp)).toLocaleString():"Time unavailable";
+      [time,ev.identity||ev.method||"Unknown method",ev.event||ev.type||"Access event",ev.result||"Unspecified"].forEach(v=>{const td=document.createElement("td");td.textContent=String(v);tr.appendChild(td);});
+      body.appendChild(tr);
+    }
+    $("#events-note").textContent=`Showing ${items.length} recent event(s).`;
+  },err=>{console.error(err);$("#events-note").textContent="Access history unavailable; check Firebase rules.";});
 }
 function listenFirebase() {
-  onValue(ref(db, "controls"), snap => {
-    const c = snap.val() || {};
-    Object.entries(lightPaths).forEach(([id, key]) => { if (typeof c[key] === "boolean") lightStates[id] = c[key]; });
-    if (typeof c.armed === "boolean") armed = c.armed;
-    renderLights(); renderSecurity();
-  }, err => { console.error(err); toast(`Cannot read controls: ${err.code || err.message}`); });
-  onValue(ref(db, "status"), snap => {
-    const s = snap.val() || {};
-    if (typeof s.doorOpen === "boolean") doorOpen = s.doorOpen;
-    if (typeof s.online === "boolean") connection(s.online ? "ESP32 online" : "Firebase connected", true);
-    if (typeof s.motion === "boolean" && s.motion && armed) {
-      if ($("#security-light-state")) $("#security-light-state").textContent = "Motion detected";
-      if ($("#bell-state")) { $("#bell-state").textContent = s.alarm ? "Alarm active" : "Motion detected"; $("#bell-state").classList.toggle("alerting", !!s.alarm); }
-      if ($("#security-status-text")) $("#security-status-text").textContent = s.alarm ? "Motion detected — alarm status active." : "Motion detected while armed.";
-    } else {
-      if ($("#security-light-state")) $("#security-light-state").textContent = "Standby";
-      if ($("#bell-state")) { $("#bell-state").textContent = s.alarm ? "Alarm active" : "Silent"; $("#bell-state").classList.toggle("alerting", !!s.alarm); }
-    }
-    renderDoor();
-  }, err => { console.error("Status listener:", err); toast(`Cannot read status: ${err.code || err.message}`); });
+  onValue(ref(db,"controls"),snap=>{
+    const c=snap.val()||{};
+    Object.entries(lightPaths).forEach(([id,key])=>{if(typeof c[key]==="boolean")lightStates[id]=c[key];});
+    if(typeof c.armed==="boolean")armed=c.armed;
+    renderLights();renderSecurity();
+  },e=>toast(`Controls read failed: ${e.code||e.message}`));
+  onValue(ref(db,"status"),snap=>renderStatus(snap.val()||{}),e=>toast(`Status read failed: ${e.code||e.message}`));
+  loadAccessEvents();
 }
-attachEvents(); renderLights(); renderSecurity(); renderDoor();
+attachEvents();renderLights();renderSecurity();renderStatus({});
 try {
-  const app = initializeApp(firebaseConfig); auth = getAuth(app); db = getDatabase(app);
-  onAuthStateChanged(auth, user => {
-    currentUser = user;
-    if (user) { connection("Signed in", true); $("#firebase-login-panel")?.remove(); listenFirebase(); }
-    else { connection("Sign in required", false); showLogin(); }
+  const app=initializeApp(firebaseConfig);auth=getAuth(app);db=getDatabase(app);
+  onAuthStateChanged(auth,user=>{
+    currentUser=user;
+    if(user){connection("Signed in","Firebase authenticated",true);$("#firebase-login-panel")?.remove();listenFirebase();}
+    else{connection("Sign-in required","Please sign in",false);showLogin();}
   });
-} catch (err) { console.error(err); connection("Config error", false); toast("Firebase initialization failed. Check firebase-config.js."); }
+} catch(e){console.error(e);connection("Config error","Check firebase-config.js",false);toast("Firebase initialization failed. Check firebase-config.js.");}
