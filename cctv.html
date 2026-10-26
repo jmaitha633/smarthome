@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b24">
+  <title>CCTV Connections | JKSmartNest</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .camera-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .camera-card {
+      background: white;
+      border: 1px solid #dfece3;
+      border-radius: 15px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .camera-card h2 { margin: 0; font-size: 19px; }
+    .camera-card p {
+      color: #71857a;
+      line-height: 1.6;
+      font-size: 13px;
+      flex: 1;
+    }
+    .camera-card a {
+      display: inline-block;
+      padding: 10px 12px;
+      background: #16804c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .camera-search {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #dfece3;
+      border-radius: 10px;
+      margin-top: 15px;
+      font: inherit;
+    }
+    .camera-note {
+      padding: 16px;
+      border-radius: 12px;
+      background: #fff7df;
+      color: #745b20;
+      line-height: 1.7;
+      margin-top: 22px;
+      font-size: 13px;
+    }
+    .back-link { display: inline-block; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <main class="main-content" style="margin:0 auto;max-width:1200px">
+    <a class="back-link" href="index.html">← Back to JKSmartNest dashboard</a>
+
+    <header>
+      <p class="eyebrow">JK ENGINEERING SOLUTIONS</p>
+      <h1>CCTV Connections</h1>
+      <p>Choose your camera brand to open its official viewing service or support website.</p>
+    </header>
+
+    <input
+      id="cameraSearch"
+      class="camera-search"
+      type="search"
+      placeholder="Search camera brands..."
+      aria-label="Search camera brands"
+    >
+
+    <section class="camera-grid" id="cameraGrid">
+
+      <article class="camera-card" data-brand="dahua dmss">
+        <h2>Dahua</h2>
+        <p>For supported Dahua cameras, remote live viewing and playback.</p>
+        <a href="https://dmss.app/" target="_blank" rel="noopener noreferrer">Open DMSS ↗</a>
+        <a href="https://www.dahuasecurity.com/" target="_blank" rel="noopener noreferrer">Dahua official website ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="hikvision hik connect">
+        <h2>Hikvision</h2>
+        <p>Access the official Hik-Connect service and manufacturer resources.</p>
+        <a href="https://www.hik-connect.com/" target="_blank" rel="noopener noreferrer">Open Hik-Connect ↗</a>
+        <a href="https://www.hikvision.com/" target="_blank" rel="noopener noreferrer">Hikvision website ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="ezviz">
+        <h2>EZVIZ</h2>
+        <p>Official resources for compatible EZVIZ smart security cameras.</p>
+        <a href="https://www.ezviz.com/" target="_blank" rel="noopener noreferrer">Open EZVIZ ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="tp link tapo">
+        <h2>TP-Link Tapo</h2>
+        <p>Find Tapo camera setup information and supported app features.</p>
+        <a href="https://www.tapo.com/" target="_blank" rel="noopener noreferrer">Open Tapo ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="reolink">
+        <h2>Reolink</h2>
+        <p>Camera apps, compatible clients, manuals and support information.</p>
+        <a href="https://reolink.com/" target="_blank" rel="noopener noreferrer">Open Reolink ↗</a>
+        <a href="https://support.reolink.com/" target="_blank" rel="noopener noreferrer">Reolink support ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="imou imou life">
+        <h2>Imou</h2>
+        <p>Official resources for compatible Imou security cameras.</p>
+        <a href="https://www.imoulife.com/" target="_blank" rel="noopener noreferrer">Open Imou Life ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="uniview unv">
+        <h2>Uniview (UNV)</h2>
+        <p>Manufacturer resources for professional IP camera systems.</p>
+        <a href="https://global.uniview.com/" target="_blank" rel="noopener noreferrer">Open Uniview ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="axis network camera">
+        <h2>Axis</h2>
+        <p>Resources for Axis network cameras and video surveillance products.</p>
+        <a href="https://www.axis.com/support" target="_blank" rel="noopener noreferrer">Axis support ↗</a>
+      </article>
+
+      <article class="camera-card" data-brand="generic onvif rtsp other ip camera">
+        <h2>Other IP cameras</h2>
+        <p>ONVIF-compatible cameras may work with suitable recorders and streaming gateways. Compatibility depends on the model.</p>
+        <a href="https://www.onvif.org/" target="_blank" rel="noopener noreferrer">ONVIF website ↗</a>
+      </article>
+
+    </section>
+
+    <div class="camera-note">
+      <strong>Important:</strong> These links open external services; they do not automatically connect a camera to JKSmartNest. To embed live video in this website, we must check the camera model and use a compatible, secure browser-streaming method. Never publish your camera password or private stream address in website code.
+    </div>
+  </main>
+
+  <script>
+    const search = document.getElementById("cameraSearch");
+    search.addEventListener("input", () => {
+      const term = search.value.trim().toLowerCase();
+      document.querySelectorAll(".camera-card").forEach(card => {
+        card.hidden = !card.dataset.brand.includes(term);
+      });
+    });
+  </script>
+</body>
+</html>
