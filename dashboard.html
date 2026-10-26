@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102b24">
+<title>JKSmartNest | JK Engineering Solutions</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="app-additions.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#overview"><span class="brand-mark">⌂</span><span><strong>JKSmartNest</strong><small>SMART HOME SYSTEM</small></span></a>
+    <div class="side-label">WORKSPACE</div>
+    <nav class="nav">
+      <a class="nav-link active" href="#overview">▦ Overview</a><a class="nav-link" href="#lighting">☼ Lighting</a>
+      <a class="nav-link" href="#security">◈ Security</a><a class="nav-link" href="#environment">♨ Safety shield</a>
+      <a class="nav-link" href="#energy">☀ Green energy</a><a class="nav-link" href="#access">⌑ Door access</a>
+      <a class="nav-link" href="cctv.html">📹 CCTV connections</a>
+      <a href="cctv.html" class="mobile-cctv-button">
+  📹 CCTV VIEWING
+</a>
+
+    </nav>
+    <div class="sidebar-bottom"><span class="connection-dot"></span><div><strong id="connection-title">Firebase setup</strong><small id="connection-detail">Sign in to connect</small></div></div>
+  </aside>
+  <main class="main-content" id="overview">
+    <header class="topbar"><div><p class="eyebrow">JK ENGINEERING SOLUTIONS</p><h1>JKSmartNest Control Centre</h1><p class="subheading">Security, automation and clean-energy monitoring.</p></div><div class="top-actions"><span class="demo-pill" id="connection-pill"><span></span> CONNECTION CHECK</span><div class="avatar">JK</div></div></header>
+    <section class="welcome-panel"><div class="welcome-copy"><div class="welcome-tag"><span class="pulse"></span> SMART HOME OPERATIONS</div><h2>Safer home. Smarter energy.</h2><p>Monitor sensor states, review safety alerts and manage connected devices. Hardware telemetry appears when the ESP32 firmware publishes it.</p><a class="text-link" href="#security">Open security monitor →</a></div><div class="house-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="house-icon"><div class="roof"></div><div class="house-body"><div class="window window-left"></div><div class="window window-right"></div><div class="door-shape"></div></div></div><div class="art-chip chip-light">☼ <span>Energy</span></div><div class="art-chip chip-shield">◈ <span>Protection</span></div></div></section>
+    <section class="section-heading"><div><p class="eyebrow">AT A GLANCE</p><h2>Live system status</h2></div><span class="updated-label" id="last-updated">Waiting for device telemetry</span></section>
+    <section class="stats-grid">
+      <article class="stat-card"><div class="stat-top"><span class="stat-icon amber">☼</span><span class="mini-label">LIGHTING</span></div><div class="stat-number"><span id="lights-on-count">0</span><small> / 3 on</small></div><p>Room lights active</p></article>
+      <article class="stat-card"><div class="stat-top"><span class="stat-icon green">◈</span><span class="mini-label">SECURITY</span></div><div class="stat-number" id="security-stat">Unknown</div><p id="security-stat-note">Waiting for security state</p></article>
+      <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">⌑</span><span class="mini-label">FRONT DOOR</span></div><div class="stat-number" id="door-stat">Unknown</div><p id="door-stat-note">Waiting for contact sensor</p></article>
+      <article class="stat-card"><div class="stat-top"><span class="stat-icon amber">☀</span><span class="mini-label">BATTERY</span></div><div class="stat-number" id="battery-stat">—%</div><p id="battery-note">No battery telemetry</p></article>
+    </section>
+    <section class="content-grid">
+      <div class="panel lighting-panel" id="lighting"><div class="panel-heading"><div><p class="eyebrow">ROOM CONTROL</p><h2>Smart lighting</h2></div><span class="count-badge"><span id="lights-on-count-small">0</span> active</span></div><p class="panel-description">Commands require sign-in. Physical switching still depends on correctly configured ESP32 firmware.</p>
+        <div class="lights-grid">
+          <article class="light-card" data-light="L1"><div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L1-state">OFF</span></div><h3>Light L1</h3><p>Living room</p><button class="toggle-button" data-toggle-light="L1" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button></article>
+          <article class="light-card" data-light="L2"><div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L2-state">OFF</span></div><h3>Light L2</h3><p>Bedroom</p><button class="toggle-button" data-toggle-light="L2" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button></article>
+          <article class="light-card" data-light="L3"><div class="light-card-top"><span class="device-icon">☼</span><span class="device-state" id="L3-state">OFF</span></div><h3>Light L3</h3><p>Kitchen / non-essential</p><button class="toggle-button" data-toggle-light="L3" aria-pressed="false"><span class="toggle-knob"></span><span class="toggle-label">Turn on</span></button></article>
+        </div>
+        <div class="voice-panel"><div class="voice-icon">🎙</div><div class="voice-copy"><strong>Voice command</strong><p id="voice-status">Try “turn on living room light” or “secure the perimeter”.</p></div><button class="primary-button" id="voice-button" type="button">🎙 Speak</button></div>
+        <form class="command-form" id="command-form"><label for="command-input">Type a command</label><div class="command-row"><input id="command-input" placeholder="e.g. all lights off" autocomplete="off"><button class="secondary-button" type="submit">Run</button></div><small>Voice and text commands are limited to an approved command list. Disarming requires a signed-in session and confirmation.</small></form>
+      </div>
+      <div class="right-column">
+        <section class="panel security-panel" id="security"><div class="panel-heading"><div><p class="eyebrow">INTRUSION DETECTION</p><h2>Security monitor</h2></div><span class="shield-icon">◈</span></div>
+          <div class="security-status" id="security-status-box"><span class="security-status-icon" id="security-status-icon">?</span><div><strong id="security-status-title">Security state unknown</strong><p id="security-status-text">Waiting for ESP32 status.</p></div></div>
+          <div class="security-controls"><button class="arm-button" id="arm-button" type="button">Arm system</button><button class="disarm-button" id="disarm-button" type="button">Disarm</button></div>
+          <div class="sensor-grid">
+            <div class="sensor-tile"><span>PIR motion</span><strong id="sensor-pir" class="sensor-state">Unknown</strong></div>
+            <div class="sensor-tile"><span>Door contact</span><strong id="sensor-door" class="sensor-state">Unknown</strong></div>
+            <div class="sensor-tile"><span>Ultrasonic</span><strong id="sensor-distance" class="sensor-state">— cm</strong></div>
+            <div class="sensor-tile"><span>Tamper switch</span><strong id="sensor-tamper" class="sensor-state">Unknown</strong></div>
+          </div>
+          <div class="device-row"><span class="row-icon">♬</span><span><strong>Local alarm</strong><small>ESP32-controlled siren/buzzer</small></span><span class="status-text" id="alarm-state">Unknown</span></div>
+          <div class="device-row"><span class="row-icon">⌁</span><span><strong>Device heartbeat</strong><small>Last ESP32 update</small></span><span class="status-text" id="device-online">Unknown</span></div>
+          <button class="test-alert-button" id="test-alert-button" type="button">Log dashboard test event</button><p class="micro-note">A dashboard test event does not test a physical siren. Local firmware must make alarm decisions even if internet or Firebase is unavailable.</p>
+        </section>
+        <section class="panel" id="environment"><div class="panel-heading"><div><p class="eyebrow">MULTI-HAZARD GUARD</p><h2>Environmental safety</h2></div><span class="hazard-icon">!</span></div><div class="safety-banner" id="safety-banner"><strong id="safety-title">No confirmed hazard data</strong><p id="safety-copy">Gas, smoke and flame readings will appear when sensors are connected.</p></div><div class="sensor-grid"><div class="sensor-tile"><span>Gas / smoke</span><strong id="sensor-gas">Unknown</strong></div><div class="sensor-tile"><span>Flame</span><strong id="sensor-flame">Unknown</strong></div><div class="sensor-tile"><span>Temperature</span><strong id="sensor-temp">— °C</strong></div><div class="sensor-tile"><span>Sensor health</span><strong id="sensor-health">Unknown</strong></div></div><p class="micro-note">Prototype readings are not a substitute for certified smoke/CO alarms. Emergency outputs must be validated on hardware; preserve safe manual egress.</p></section>
+      </div>
+    </section>
+    <section class="panel energy-panel" id="energy"><div class="panel-heading"><div><p class="eyebrow">GREEN ENERGY</p><h2>Solar & battery analytics</h2></div><span class="count-badge">POWER MONITOR</span></div><div class="energy-grid"><article><span>Solar generation</span><strong id="solar-watts">— W</strong><small id="solar-volts">Voltage: — V</small></article><article><span>Load consumption</span><strong id="load-watts">— W</strong><small id="load-amps">Current: — A</small></article><article><span>Battery voltage</span><strong id="battery-volts">— V</strong><small id="battery-current">Current: — A</small></article><article><span>Estimated state of charge</span><strong id="battery-soc">—%</strong><small id="load-shed-state">Load shedding: unknown</small></article></div><div class="energy-meter"><div><span>Battery reserve</span><strong id="battery-meter-label">Waiting for telemetry</strong></div><div class="meter-track"><div id="battery-meter-fill"></div></div></div><p class="micro-note">INA219 measures voltage/current at its measurement point; it cannot independently measure solar, battery and household load simultaneously. Use separate correctly rated sensors for each path. State of charge is an estimate unless measured by a suitable battery monitor.</p></section>
+    <section class="panel history-panel" id="access"><div class="panel-heading"><div><p class="eyebrow">ENTRY CONTROL & AUDIT</p><h2>Access history</h2></div><span class="count-badge">LATEST EVENTS</span></div><p class="panel-description">Events must be written by trusted firmware or a secured backend. Never trust a browser-only “authorized” label as proof of identity.</p><div class="table-wrap"><table class="event-table"><thead><tr><th>Time</th><th>Identity / method</th><th>Event</th><th>Result</th></tr></thead><tbody id="access-events"><tr><td colspan="4">No access events received yet.</td></tr></tbody></table></div><div class="access-actions"><button class="secondary-button" id="refresh-events" type="button">Refresh events</button><span id="events-note">Live events require Firebase rules and device integration.</span></div></section>
+    <section class="contact-cta"><div class="contact-cta-icon">☀</div><div class="contact-cta-copy"><p class="eyebrow">CLEAN ENERGY & ENGINEERING SUPPORT</p><h2>JK Engineering Solutions</h2><p>Smart home automation, solar energy, lighting, motor control and security systems.</p></div><a class="contact-cta-button" href="contact.html">Services & contact →</a></section>
+    <footer class="site-footer"><span>JKSmartNest · Smart Home Security & Automation</span><span>Web dashboard · ESP32 firmware required</span></footer>
+  </main>
+</div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="script.js"></script>
+ 
+ </body></html>
+</body></html>
